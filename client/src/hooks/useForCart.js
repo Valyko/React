@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 export const useForCart = () => {
   const products = useSelector(state => state.products)
-  const cardInCart = useSelector(state => state.cart.cart)
+  const cardInCart = useSelector(state => state.cart.data)
   const token = useSelector(state => state.auth.token)
 
   const totalPrice = () => {
@@ -25,7 +25,7 @@ export const useForCart = () => {
       const array = []
 
       if (itemsinCart) {
-        products.products.forEach(item => {
+        products.data.forEach(item => {
           itemsinCart.forEach(el => {
             return item._id === el ? array.push(item) : null
           })
@@ -45,7 +45,7 @@ export const useForCart = () => {
   const findItemsInCart = () => {
     const itemsinCart = JSON.parse(localStorage.getItem('cart'))
     if (itemsinCart) {
-      return products.products.filter(item => itemsinCart.includes(item._id))
+      return products.data.filter(item => itemsinCart.includes(item._id))
     }
   }
 

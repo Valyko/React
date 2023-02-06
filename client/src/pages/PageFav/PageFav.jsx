@@ -9,16 +9,14 @@ import BreadCrumbs from '../../components/BreadCrumbs'
 const PageFav = () => {
   const products = useSelector(state => state.products)
   const favCounter = useSelector(state => state.counter.inFav)
-  const { favItems, isItemsLoading, itemsError } = useSelector(
-    state => state.wishlist
-  )
+  const { data, loading, error } = useSelector(state => state.wishlist)
   const token = useSelector(state => state.auth.token)
 
   const findItemsFav = () => {
     const itemsFav = JSON.parse(localStorage.getItem('fav'))
 
     if (itemsFav) {
-      return products.products.filter(item => itemsFav.includes(item._id))
+      return products.data.filter(item => itemsFav.includes(item._id))
     }
   }
 
@@ -28,10 +26,10 @@ const PageFav = () => {
       {favCounter ? (
         <>
           <Title subtitle='Your favourite cards' />
-          {isItemsLoading ? (
+          {loading ? (
             <Loader />
-          ) : (token ? favItems.products : findItemsFav()) ? (
-            <ContainerFav items={token ? favItems : findItemsFav()} />
+          ) : (token ? data : findItemsFav()) ? (
+            <ContainerFav items={token ? data.products : findItemsFav()} />
           ) : null}
         </>
       ) : (

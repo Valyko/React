@@ -9,15 +9,15 @@ import {
   fetchAddToCart,
   fetchDeletaCardFromCart,
   fetchDeleteFromCart
-} from '../store/cart/cart'
+} from '../store/cart/ActionCreators'
 
 export const useFunctionality = id => {
   const [inFav, setInFav] = useState(false)
   const [inCart, setInCart] = useState(false)
   const dispatch = useDispatch()
   const token = useSelector(state => state.auth.token)
-  const cardInCart = useSelector(state => state.cart.cart)
-  const cardInFav = useSelector(state => state.wishlist.favItems)
+  const cardInCart = useSelector(state => state.cart.data)
+  const cardInFav = useSelector(state => state.wishlist.data)
   let values
 
   useEffect(() => {
@@ -86,9 +86,8 @@ export const useFunctionality = id => {
       }
     }
 
-    if (cardInFav.products.length !== 0) {
-      const arrFav = cardInFav.products
-      const arrFavId = arrFav.products.map(item => {
+    if (cardInFav.length !== 0) {
+      const arrFavId = cardInFav.products.map(item => {
         return item._id
       })
       if (arrFavId.includes(id)) {

@@ -8,7 +8,7 @@ import AlsoLike from '../../components/AlsoLike'
 import BreadCrumbs from '../../components/BreadCrumbs'
 
 const PageCart = () => {
-  const cardInCart = useSelector(state => state.cart.cart)
+  const cardInCart = useSelector(state => state.cart.data)
   const cartCounter = useSelector(state => state.counter)
   const token = useSelector(state => state.auth.token)
   const { totalPrice, findItemsInCart } = useForCart()

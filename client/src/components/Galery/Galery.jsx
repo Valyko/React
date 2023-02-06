@@ -110,9 +110,9 @@ const Galery = () => {
 
   return (
     <ul className='content-list'>
-      {products.products ? (
+      {products.data ? (
         <>
-          {products.products.map(item => (
+          {products.data.map(item => (
             <li key={item._id}>
               <ProductCard
                 ident={item.itemNo}

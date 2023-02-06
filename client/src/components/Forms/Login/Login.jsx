@@ -4,7 +4,7 @@ import Input from '../Input'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchLogin } from '../../../store/login/login'
+import { fetchLogin } from '../../../store/login/ActionCreators'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 

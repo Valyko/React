@@ -1,34 +1,9 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { login } from '../tokenWork/tokenWork'
-
-export const fetchSignIn = createAsyncThunk(
-  'signIn/fetchSignIn',
-  async function (value, { rejectWithValue, dispatch }) {
-    try {
-      const respons = await fetch('/api/customers/login', {
-        method: 'POST',
-        body: JSON.stringify({
-          loginOrEmail: value.loginOrEmail,
-          password: value.password
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      if (!respons.ok) {
-        throw new Error('Server Error!')
-      }
-      const data = await respons.json()
-      dispatch(login(data.token))
-      return data
-    } catch (error) {
-      return rejectWithValue(error.message)
-    }
-  }
-)
+import { createSlice } from '@reduxjs/toolkit'
+import extraReducer from '../ExtraReducer'
+import { fetchSignIn } from './ActionCreators'
 
 const initialState = {
-  signIn: '',
+  data: '',
   status: null,
   error: null
 }
@@ -42,19 +17,8 @@ export const signInSlice = createSlice({
       state.signIn = ''
     }
   },
-  extraReducers: {
-    [fetchSignIn.pending]: state => {
-      state.status = 'loading'
-      state.error = null
-    },
-    [fetchSignIn.fulfilled]: (state, action) => {
-      state.status = 'resolved'
-      state.signIn = action.payload.token
-    },
-    [fetchSignIn.rejected]: (state, action) => {
-      state.status = 'rejected'
-      state.error = action.payload
-    }
+  extraReducers: builder => {
+    extraReducer(builder, fetchSignIn, initialState)
   }
 })
 

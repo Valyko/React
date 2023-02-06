@@ -5,7 +5,7 @@ import Button from '../../Button'
 import Input from '../Input'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSignIn } from '../../../store/signIn/signIn'
+import { fetchSignIn } from '../../../store/signIn/ActionCreators'
 import { useEffect } from 'react'
 import { useState } from 'react'
 

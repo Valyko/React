@@ -23,7 +23,7 @@ const Colors = ({ contentActive }) => {
   }
 
   useEffect(() => {
-    const colorsArray = products.products.map(item => item.color)
+    const colorsArray = products.data.map(item => item.color)
     const uniqueColors = new Set(colorsArray)
     setColorsFilters(Array.from(uniqueColors))
   }, [products, setColorsFilters])

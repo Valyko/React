@@ -5,10 +5,8 @@ import Input from '../Input'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import {
-  clearStatusPass,
-  fetchChangePassword
-} from '../../../store/user/userSlice'
+import { clearStatusPass } from '../../../store/user/userSlice'
+import { fetchChangePassword } from '../../../store/user/ActionCreators'
 import styles from './ChangePassword.module.scss'
 import * as yup from 'yup'
 import ErrorText from '../../TextRequests/TextRequests'
@@ -23,7 +21,7 @@ const validationSchema = yup.object().shape({
 
 const ChangePassword = () => {
   const dispatch = useDispatch()
-  const userInfo = useSelector(state => state.user.info)
+  const userInfo = useSelector(state => state.user.data)
   const { statusChangePass } = useSelector(state => state.user)
   const [visibleErrorMatch, setVisibleErrorMatch] = useState(false)
   const [visibleError, setVisibleError] = useState(false)

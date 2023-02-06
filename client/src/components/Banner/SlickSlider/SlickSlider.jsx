@@ -3,7 +3,7 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSlides } from '../../../store/slides/slides'
+import { fetchSlides } from '../../../store/slides/ActionCreators'
 
 const SlickSlider = () => {
   const dispatch = useDispatch()
@@ -28,9 +28,7 @@ const SlickSlider = () => {
     <div className='container'>
       {slides && (
         <Slider {...settings}>
-          {slides.slides.map(item =>
-            item.imageUrl.map(url => <img src={url} />)
-          )}
+          {slides.data.map(item => item.imageUrl.map(url => <img src={url} />))}
         </Slider>
       )}
     </div>
