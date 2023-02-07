@@ -1,8 +1,11 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts } from './store/products/productSlice'
+import { fetchProducts } from './store/products/ActionCreators'
 import { login } from './store/tokenWork/tokenWork'
-import { fetchGetAllFromCart, fetchUpdateCart } from './store/cart/cart'
+import {
+  fetchGetAllFromCart,
+  fetchUpdateCart
+} from './store/cart/ActionCreators'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import AppRouter from './router/AppRouter'
@@ -12,7 +15,7 @@ import {
   fetchWishlist
 } from './store/wishlist/ActionCreator'
 import { useLocation } from 'react-router-dom'
-import { fetchGetUser } from './store/user/userSlice'
+import { fetchGetUser } from './store/user/ActionCreators'
 import { createBrowserHistory } from 'history'
 import { setLocation } from './store/location/location'
 import { clearStatusOrder } from './store/order/order'
@@ -25,7 +28,7 @@ function App() {
   const { favItems } = useSelector(state => state.wishlist)
   const { location } = useSelector(state => state.location)
   const history = createBrowserHistory()
-  const cardInCart = useSelector(state => state.cart.cart)
+  const cardInCart = useSelector(state => state.cart.data)
 
   useEffect(() => {
     dispatch(setLocation(history.location.pathname))

@@ -2,11 +2,8 @@ import React, { useEffect, useRef } from 'react'
 import ProductCard from '../ProductCard'
 import qs from 'qs'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-  fetchFilterProducts,
-  setFilters,
-  setInitialState
-} from '../../store/filter/filterSlice'
+import { setFilters, setInitialState } from '../../store/filter/filterSlice'
+import { fetchFilterProducts } from '../../store/filter/ActionCreators'
 import { useNavigate } from 'react-router-dom'
 import './index.scss'
 import { sortOptions } from '../SortList/SortList'
@@ -110,9 +107,9 @@ const Galery = () => {
 
   return (
     <ul className='content-list'>
-      {products.products ? (
+      {products.data ? (
         <>
-          {products.products.map(item => (
+          {products.data.map(item => (
             <li key={item._id}>
               <ProductCard
                 ident={item.itemNo}

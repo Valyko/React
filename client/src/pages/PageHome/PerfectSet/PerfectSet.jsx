@@ -13,19 +13,19 @@ const PerfectSet = () => {
   const [randomRange, setRandomRange] = useState(0)
 
   useEffect(() => {
-    setProductCount(products.products.length)
+    setProductCount(products.data.length)
     setRandomRange(getRandomRange(0, productsCount, 4))
-  }, [products.products, productsCount])
+  }, [products.data, productsCount])
 
   return (
     <div className='container'>
       <Title title='new arrivals' subtitle='Choose your perfect set' />
-      {products.products ? (
+      {products.data ? (
         products.status === 'loading' ? (
           <Loader />
         ) : (
           <section className='set'>
-            {products.products
+            {products.data
               .slice(randomRange.start, randomRange.end)
               .map(item => (
                 <ProductCard

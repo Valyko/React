@@ -1,34 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-
-export const fetchFilterProducts = createAsyncThunk(
-  'filters/fetchFilterProducts',
-  async function (filtersData, { rejectWithValue }) {
-    const {
-      categoryFilter,
-      colorFilter,
-      sizeFilter,
-      startPage,
-      perPage,
-      sortFilter,
-      minPrice,
-      maxPrice
-    } = filtersData
-
-    try {
-      const respons = await fetch(
-        `/api/products/filter?startPage=${startPage}&perPage=${perPage}${categoryFilter}${colorFilter}${sizeFilter}${sortFilter}&minPrice=${minPrice}&maxPrice=${maxPrice}`
-      )
-
-      if (!respons.ok) {
-        throw new Error('Server Error!')
-      }
-      const data = await respons.json()
-      return data
-    } catch (error) {
-      return rejectWithValue(error.message)
-    }
-  }
-)
+import { createSlice } from '@reduxjs/toolkit'
+import { fetchFilterProducts } from './ActionCreators'
+import extraReducer from '../ExtraReducer'
 
 const initialState = {
   startPage: 1,
@@ -92,19 +64,8 @@ export const filterSlice = createSlice({
       state.maxPrice = action.payload
     }
   },
-  extraReducers: {
-    [fetchFilterProducts.pending]: state => {
-      state.status = 'loading'
-      state.error = null
-    },
-    [fetchFilterProducts.fulfilled]: (state, action) => {
-      state.status = 'resolved'
-      state.products = action.payload
-    },
-    [fetchFilterProducts.rejected]: (state, action) => {
-      state.status = 'rejected'
-      state.error = action.payload
-    }
+  extraReducers: builder => {
+    extraReducer(builder, fetchFilterProducts, initialState)
   }
 })
 

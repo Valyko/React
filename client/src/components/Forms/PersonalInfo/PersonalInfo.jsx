@@ -7,10 +7,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import styles from './PersonalInfo.module.scss'
-import {
-  clearStatusUpdate,
-  fetchUpdateUser
-} from '../../../store/user/userSlice'
+import { clearStatusUpdate } from '../../../store/user/userSlice'
+import { fetchUpdateUser } from '../../../store/user/ActionCreators'
 import ErrorText from '../../TextRequests/TextRequests'
 
 const phoneRegExp =

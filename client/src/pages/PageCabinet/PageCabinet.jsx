@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import ChangePassword from '../../components/Forms/ChangePassword'
 import PersonalInfo from '../../components/Forms/PersonalInfo/PersonalInfo'
 import Title from '../../components/Title'
-import { fetchDeleteOrder, getOrdersUser } from '../../store/order/order'
+import {
+  fetchDeleteOrder,
+  getOrdersUser
+} from '../../store/order/ActionCreators'
 import styles from './PageCabinet.module.scss'
 import ProductCard from '../../components/ProductCard/ProductCard'
 import BreadCrumbs from '../../components/BreadCrumbs'
@@ -13,8 +16,8 @@ import Modal from '../../components/Modal'
 import Button from '../../components/Button'
 
 const PageCabinet = () => {
-  const userInfo = useSelector(state => state.user.info)
-  const { order } = useSelector(state => state.order)
+  const userInfo = useSelector(state => state.user.data)
+  const order = useSelector(state => state.order.data)
   const [info, setInfo] = useState(true)
   const [orderVis, setOrderVis] = useState(false)
   const [modal, setModal] = useState(false)

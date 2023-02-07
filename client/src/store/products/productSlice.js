@@ -1,23 +1,9 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-
-export const fetchProducts = createAsyncThunk(
-  'products/fetchProducts',
-  async function (_, { rejectWithValue }) {
-    try {
-      const respons = await fetch('/api/products')
-      if (!respons.ok) {
-        throw new Error('Server Error!')
-      }
-      const data = await respons.json()
-      return data
-    } catch (error) {
-      return rejectWithValue(error.message)
-    }
-  }
-)
+import { createSlice } from '@reduxjs/toolkit'
+import extraReducer from '../ExtraReducer'
+import { fetchProducts } from './ActionCreators'
 
 const initialState = {
-  products: [],
+  data: [],
   status: null,
   error: null
 }
@@ -25,19 +11,8 @@ const initialState = {
 export const productSlice = createSlice({
   name: 'products',
   initialState,
-  extraReducers: {
-    [fetchProducts.pending]: state => {
-      state.status = 'loading'
-      state.error = null
-    },
-    [fetchProducts.fulfilled]: (state, action) => {
-      state.status = 'resolved'
-      state.products = action.payload
-    },
-    [fetchProducts.rejected]: (state, action) => {
-      state.status = 'rejected'
-      state.error = action.payload
-    }
+  extraReducers: builder => {
+    extraReducer(builder, fetchProducts, initialState)
   }
 })
 

@@ -24,7 +24,7 @@ export const fetchCreateCart = createAsyncThunk(
 )
 
 export const fetchUpdateCart = createAsyncThunk(
-  'cart/fetchAddToCart',
+  'cart/fetchUpdateCart',
   async function (value, { rejectWithValue, getState, dispatch }) {
     const stateToken = getState().auth.token
     try {

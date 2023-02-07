@@ -13,19 +13,19 @@ const Sales = () => {
   const [randomRange, setRandomRange] = useState(0)
 
   useEffect(() => {
-    setProductCount(products.products.length)
+    setProductCount(products.data.length)
     setRandomRange(getRandomRange(0, productsCount, 5))
-  }, [products.products, productsCount])
+  }, [products.data, productsCount])
 
   return (
     <div className='container'>
       <Title title='Sales and promotions' subtitle='Catch the best price' />
-      {products.products ? (
+      {products.data ? (
         products.status === 'loading' ? (
           <Loader />
         ) : (
           <section className='sales'>
-            {products.products
+            {products.data
               .slice(randomRange.start, randomRange.end)
               .map(item => (
                 <ProductCard

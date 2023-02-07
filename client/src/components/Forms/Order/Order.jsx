@@ -30,7 +30,7 @@ const validationSchema = yup.object().shape({
 })
 
 const Order = ({ createOrder }) => {
-  const userInfo = useSelector(state => state.user.info)
+  const userInfo = useSelector(state => state.user.data)
 
   const initialValues = {
     email: userInfo.email,
