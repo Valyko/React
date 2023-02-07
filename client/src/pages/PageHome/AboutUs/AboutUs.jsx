@@ -21,12 +21,12 @@ const AboutUs = () => {
           <div className='d-flex gap-4 aboutImg'>
             <img
               className='img-fluid overflow-auto'
-              src='./images/home/about1.png'
+              src='https://kept.com.ua/image/20Yd/about1.png'
               alt='about1'
             />
             <img
               className='img-fluid overflow-auto'
-              src='./images/home/about2.png'
+              src='https://kept.com.ua/image/20Ye/about2.png'
               alt='about2'
             />
           </div>
