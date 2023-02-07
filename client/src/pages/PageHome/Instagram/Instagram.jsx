@@ -15,27 +15,27 @@ const Instagram = () => {
         <div className='subSections'>
           <img
             className='img-fluid overflow-auto flex-grow-1'
-            src='./images/home/inst_img.png'
+            src='https://kept.com.ua/image/20Yj/inst_img.png'
             alt=''
           />
         </div>
         <div className='d-flex gap-4'>
           <img
             className='img-fluid overflow-auto flex-grow-1'
-            src='./images/home/inst_img-1.png'
+            src='https://kept.com.ua/image/20Yg/inst_img-1.png'
             alt=''
           />
 
           <img
             className='img-fluid overflow-auto flex-grow-1'
-            src='./images/home/inst_img-2.png'
+            src='https://kept.com.ua/image/20Yh/inst_img-2.png'
             alt=''
           />
         </div>
         <div className='subSections'>
           <img
             className='img-fluid overflow-auto flex-grow-1'
-            src='./images/home/inst_img-3.png'
+            src='https://kept.com.ua/image/20Yi/inst_img-3.png'
             alt=''
           />
         </div>
