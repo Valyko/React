@@ -1,3 +1,6 @@
+@import '../../styles/variables.scss';
+@import '../../styles/breakpoints.scss';
+
 .header {
   width: 100%;
   display: flex;
@@ -6,15 +9,13 @@
   padding: 0 25px;
   align-items: center;
   height: 72px;
-  @media (max-width: 660px) {
+  @include for-small-up {
     padding: 0 15px;
   }
-  // styles for new input
   &__searchContainer {
     position: relative;
     top: 40px;
   }
-  // styles for new input
   &__block {
     &_logo {
       border-right: 1px solid #dee6ed;
@@ -22,10 +23,8 @@
       height: 100%;
       display: flex;
       align-items: center;
-      @media (max-width: 660px) {
+      @include for-small-up {
         border-right: none;
-      }
-      @media (max-width: 450px) {
         padding-right: 10px;
       }
     }
@@ -34,14 +33,12 @@
       &_page {
         cursor: pointer;
       }
-      @media (max-width: 992px) {
+      @include for-large-up {
         display: block;
         height: 100%;
         display: flex;
         align-items: center;
         cursor: pointer;
-      }
-      @media (max-width: 660px) {
       }
       &_btn {
         width: 32px;
@@ -70,21 +67,13 @@
       align-items: center;
       svg {
         margin: 0 15px;
-        @media (max-width: 450px) {
+        @include for-small-up {
           height: 15px;
           margin: 0 9px;
           &:nth-child(3) {
             display: none;
           }
         }
-        // @media (max-width: 660px) {
-        //   &:first-child {
-        //     display: none;
-        //   }
-        //   &:nth-child(2) {
-        //     display: none;
-        //   }
-        // }
       }
       a {
         position: relative;

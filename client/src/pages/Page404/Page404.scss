@@ -1,5 +1,5 @@
-@import '../PageHome/PerfectSet/breakpoints.scss';
-@import '../PageHome/PerfectSet/variables.scss';
+@import '../../styles/variables.scss';
+@import '../../styles/breakpoints.scss';
 
 .page {
   &__wrapper {
@@ -56,6 +56,9 @@
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   &__button {

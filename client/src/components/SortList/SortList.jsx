@@ -13,8 +13,6 @@ const SortList = () => {
   const dispatch = useDispatch()
   const sort = useSelector(state => state.filter.sort)
 
-  // const sortOption = sortOptions[selected].sortName;
-
   const onSelected = sort => {
     dispatch(setSortType(sort))
     setSortActive(false)

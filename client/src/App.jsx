@@ -25,7 +25,7 @@ function App() {
   const dispatch = useDispatch()
   const token = useSelector(state => state.auth.token)
   const locationHook = useLocation()
-  const { favItems } = useSelector(state => state.wishlist)
+  const favItems = useSelector(state => state.wishlist.data)
   const { location } = useSelector(state => state.location)
   const history = createBrowserHistory()
   const cardInCart = useSelector(state => state.cart.data)
@@ -89,11 +89,9 @@ function App() {
   const sedtItemsFromLocalStorageWishlist = () => {
     if (JSON.parse(localStorage.getItem('fav'))) {
       const favs = JSON.parse(localStorage.getItem('fav'))
-      if (favItems.products.products) {
-        const favsProducts = favItems.products.products
-
-        if (favsProducts.length !== 0) {
-          favsProducts.forEach(item => favs.push(item._id))
+      if (favItems) {
+        if (favItems.length !== 0) {
+          favItems.forEach(item => favs.push(item._id))
         }
       }
 

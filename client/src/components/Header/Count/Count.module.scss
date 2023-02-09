@@ -1,3 +1,5 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/breakpoints.scss';
 .count {
     background-color: #387BB9;
     border-radius: 50%;
@@ -9,5 +11,10 @@
       line-height: 8px;
       color: #F5F8FA;
       padding: 3px 4px;
+      @include for-small-up {
+        padding: 1px 3px;
+        right: 8px;
+        bottom: -1px;
+      }
     
   }
