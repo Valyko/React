@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setFilters, setInitialState } from '../../store/filter/filterSlice'
 import { fetchFilterProducts } from '../../store/filter/ActionCreators'
 import { useNavigate } from 'react-router-dom'
-import './index.scss'
 import { sortOptions } from '../SortList/SortList'
 
 const Galery = () => {

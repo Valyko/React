@@ -1,3 +1,6 @@
+@import '../../styles/variables.scss';
+@import '../../styles/breakpoints.scss';
+
 .up {
   background-color: #387bb9;
   border: 1px solid #387bb9;
@@ -13,19 +16,19 @@
   align-content: center;
   align-items: center;
   cursor: pointer;
+  .svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+  }
   &:hover {
     background-color: inherit;
     .svg {
       fill: #387bb9;
     }
   }
-  @media (max-width: 550px) {
+  @include for-small-up {
     bottom: 10%;
     right: 5%;
   }
-}
-.svg {
-  width: 20px;
-  height: 20px;
-  fill: white;
 }

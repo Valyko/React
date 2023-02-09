@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Checkbox from '../Checkbox'
-import './index.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { setColor, setstartPage } from '../../store/filter/filterSlice'
 
