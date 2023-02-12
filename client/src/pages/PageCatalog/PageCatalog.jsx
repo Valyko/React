@@ -22,6 +22,7 @@ const PageCatalog = () => {
   const { products, startPage, perPage, minPrice, maxPrice } = useSelector(
     state => state.filter
   )
+  // const products = useSelector(state => state.filter.data.products)
   const pagesCount = Math.ceil(products.productsQuantity / perPage)
   const currentWidth = useWindowSize()
 
@@ -50,7 +51,7 @@ const PageCatalog = () => {
 
   const dispatch = useDispatch()
   useEffect(() => {
-    currentWidth < 768 ? dispatch(setperPage(2)) : dispatch(setperPage(6))
+    currentWidth < 768 ? dispatch(setperPage(6)) : dispatch(setperPage(6))
     currentWidth < 768 ? setfiltersIsOpen(false) : setfiltersIsOpen(true)
   }, [currentWidth, dispatch])
 

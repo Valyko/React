@@ -14,8 +14,13 @@ function filler(pagesCount) {
 const Pagination = () => {
   const dispatch = useDispatch()
   const { products, startPage, perPage } = useSelector(state => state.filter)
+  // const products = useSelector(state => state.filter.data.products)
   const pagesCount = Math.ceil(products.productsQuantity / perPage)
   const [pages, setPages] = useState([])
+
+  useEffect(() => {
+    dispatch(setstartPage(1))
+  }, [])
 
   useEffect(() => {
     setPages(filler(pagesCount))
@@ -29,13 +34,17 @@ const Pagination = () => {
     <div className='pages'>
       {pages.length &&
         pages.map((page, index) => (
-          <span
-            key={index}
-            className={startPage === page ? 'start-page-number' : 'page-number'}
-            onClick={() => dispatch(setstartPage(page))}
-          >
-            {page}
-          </span>
+          <>
+            <span
+              key={index}
+              className={
+                startPage === page ? 'start-page-number' : 'page-number'
+              }
+              onClick={() => dispatch(setstartPage(page))}
+            >
+              {page}
+            </span>
+          </>
         ))}
     </div>
   )

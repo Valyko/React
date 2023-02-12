@@ -37,7 +37,7 @@
   }
 
   &-wrapper {
-    @include for-medium-up {
+    @include for-medium-min {
       display: grid;
       grid-template: 1fr / minmax(auto, 240px) minmax(auto, 1fr);
       justify-content: center;
@@ -52,6 +52,12 @@
     position: relative;
     grid-column: 2/3;
     justify-content: center;
+    @include for-medium-up {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+    }
   }
 }
 

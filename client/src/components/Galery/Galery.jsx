@@ -6,6 +6,7 @@ import { setFilters, setInitialState } from '../../store/filter/filterSlice'
 import { fetchFilterProducts } from '../../store/filter/ActionCreators'
 import { useNavigate } from 'react-router-dom'
 import { sortOptions } from '../SortList/SortList'
+import './Galery.scss'
 
 const Galery = () => {
   const {
@@ -18,6 +19,7 @@ const Galery = () => {
     minPrice,
     maxPrice
   } = useSelector(state => state.filter)
+  // const { products } = useSelector(state => state.filter.data)
   const sort = useSelector(state => state.filter.sort.sortProperty)
 
   const isSearch = useRef(false)
@@ -106,9 +108,9 @@ const Galery = () => {
 
   return (
     <ul className='content-list'>
-      {products.data ? (
+      {products.products ? (
         <>
-          {products.data.map(item => (
+          {products.products.map(item => (
             <li key={item._id}>
               <ProductCard
                 ident={item.itemNo}

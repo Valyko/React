@@ -64,8 +64,19 @@ export const filterSlice = createSlice({
       state.maxPrice = action.payload
     }
   },
-  extraReducers: builder => {
-    extraReducer(builder, fetchFilterProducts, initialState)
+  extraReducers: {
+    [fetchFilterProducts.pending]: state => {
+      state.status = 'loading'
+      state.error = null
+    },
+    [fetchFilterProducts.fulfilled]: (state, action) => {
+      state.status = 'resolved'
+      state.products = action.payload
+    },
+    [fetchFilterProducts.rejected]: (state, action) => {
+      state.status = 'rejected'
+      state.error = action.payload
+    }
   }
 })
 
