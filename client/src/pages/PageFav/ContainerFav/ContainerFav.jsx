@@ -1,12 +1,9 @@
 import React from 'react'
 import ProductCard from '../../../components/ProductCard'
-import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import './ContainerFav.scss'
 
 const ContainerFav = ({ items }) => {
-  const token = useSelector(state => state.auth.token)
-
   return (
     items && (
       <div className='favorit-wrapper'>

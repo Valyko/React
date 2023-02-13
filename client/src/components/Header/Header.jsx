@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { ReactComponent as User } from './svg/user.svg'
 import { ReactComponent as Cart } from './svg/cart.svg'
@@ -43,9 +43,9 @@ const Header = () => {
     setMenu(!menu)
   }
 
-  const clickSearch = () => {
+  const clickSearch = useCallback(() => {
     setSearchView(!searchView)
-  }
+  }, [searchView])
 
   useEffect(() => {
     if (searchView) {
@@ -57,7 +57,7 @@ const Header = () => {
       document.addEventListener('mousedown', handleClick)
       return () => document.removeEventListener('mousedown', handleClick)
     }
-  }, [searchView])
+  }, [searchView, clickSearch])
 
   const logOut = () => {
     dispatch(logout())

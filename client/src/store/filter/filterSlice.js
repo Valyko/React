@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchFilterProducts } from './ActionCreators'
-import extraReducer from '../ExtraReducer'
 
 const initialState = {
   startPage: 1,

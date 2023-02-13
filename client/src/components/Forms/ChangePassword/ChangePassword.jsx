@@ -32,7 +32,7 @@ const ChangePassword = () => {
 
   useEffect(() => {
     dispatch(clearStatusPass())
-  }, [location])
+  }, [location, dispatch])
 
   useEffect(() => {
     if (userInfo.password === 'Password does not match') {

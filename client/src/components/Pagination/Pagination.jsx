@@ -20,7 +20,7 @@ const Pagination = () => {
 
   useEffect(() => {
     dispatch(setstartPage(1))
-  }, [])
+  })
 
   useEffect(() => {
     setPages(filler(pagesCount))
@@ -36,7 +36,7 @@ const Pagination = () => {
         pages.map((page, index) => (
           <>
             <span
-              key={index}
+              key={page}
               className={
                 startPage === page ? 'start-page-number' : 'page-number'
               }

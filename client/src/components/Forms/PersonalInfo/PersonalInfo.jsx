@@ -39,7 +39,7 @@ const PersonalInfo = () => {
 
   useEffect(() => {
     dispatch(clearStatusUpdate())
-  }, [location])
+  }, [location, dispatch])
 
   useEffect(() => {
     if (statusUpdate === 'rejected') {

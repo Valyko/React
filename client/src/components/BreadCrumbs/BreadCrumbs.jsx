@@ -18,7 +18,7 @@ const NavigatePanel = ({ startFrom }) => {
         const isLast = index === pathNames.length - 1
         pathname = pathname[0].toUpperCase() + pathname.slice(1)
         return isLast ? (
-          <Link className={styles.link} key={pathname}>
+          <Link className={styles.link} key={index}>
             {' ' + pathname + ' '}
           </Link>
         ) : (

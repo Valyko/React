@@ -1,10 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import extraReducer from '../ExtraReducer'
-import {
-  fetchChangePassword,
-  fetchGetUser,
-  fetchUpdateUser
-} from './ActionCreators'
+import { fetchGetUser, fetchUpdateUser } from './ActionCreators'
 
 const initialState = {
   data: [],
@@ -28,23 +24,7 @@ export const userSlice = createSlice({
   extraReducers: builder => {
     extraReducer(builder, fetchGetUser, initialState)
     extraReducer(builder, fetchUpdateUser, initialState)
-
-    // builder
-    // .addCase()
   }
-
-  // [fetchChangePassword.pending]: state => {
-  //   state.statusChangePass = 'loading'
-  //   state.error = null
-  // },
-  // [fetchChangePassword.fulfilled]: (state, action) => {
-  //   state.statusChangePass = 'resolved'
-  //   state.info = action.payload
-  // },
-  // [fetchChangePassword.rejected]: (state, action) => {
-  //   state.statusChangePass = 'rejected'
-  //   state.error = action.payload
-  // }
 })
 
 export const { clearStatusUpdate, clearStatusPass } = userSlice.actions

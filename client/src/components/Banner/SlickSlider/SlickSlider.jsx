@@ -28,7 +28,9 @@ const SlickSlider = () => {
     <div className='container'>
       {slides && (
         <Slider {...settings}>
-          {slides.data.map(item => item.imageUrl.map(url => <img src={url} />))}
+          {slides.data.map(item =>
+            item.imageUrl.map(url => <img src={url} alt='banner' />)
+          )}
         </Slider>
       )}
     </div>

@@ -49,7 +49,7 @@ const Login = () => {
     if (statusSignIn === 'resolved' || token) {
       navigate('/')
     }
-  }, [statusSignIn, token])
+  }, [statusSignIn, token, navigate])
 
   const registerUser = value => {
     dispatch(fetchLogin(value))

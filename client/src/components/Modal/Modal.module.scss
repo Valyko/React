@@ -41,7 +41,7 @@
   }
   &_footer {
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     & button {
       &:first-child {
         margin-right: 40px;
