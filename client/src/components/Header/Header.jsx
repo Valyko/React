@@ -20,7 +20,7 @@ import { useRef } from 'react'
 
 const Header = () => {
   const [menu, setMenu] = useState(false)
-  const [searchView, setSearchView] = useState()
+  const [searchView, setSearchView] = useState(false)
   const { inFav, inCart } = useSelector(state => state.counter)
   const token = useSelector(state => state.auth.token)
   const dispatch = useDispatch()
@@ -82,7 +82,10 @@ const Header = () => {
           <NavLink to={token ? '/profile' : '/signin'}>
             <User style={{ cursor: 'pointer' }} />
           </NavLink>
-          <Search onClick={() => clickSearch()} style={{ cursor: 'pointer' }} />
+          <Search
+            onClick={!searchView ? () => clickSearch() : null}
+            style={{ cursor: 'pointer' }}
+          />
           <NavLink to='/fav'>
             <Fav />
             {inFav ? <Count count={inFav} /> : null}

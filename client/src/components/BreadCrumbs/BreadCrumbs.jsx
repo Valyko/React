@@ -14,17 +14,17 @@ const NavigatePanel = ({ startFrom }) => {
       <Link to='/' className={styles.link_f}>
         {startFrom + ' '}
       </Link>
-      {pathNames.map((pathname, index) => {
+      {pathNames.map((path, index) => {
         const routeTo = `/${pathNames.slice(0, index + 1).join('/')}`
         const isLast = index === pathNames.length - 1
-        pathname = pathname[0].toUpperCase() + pathname.slice(1)
+        path = path[0].toUpperCase() + path.slice(1)
 
-        return pathname !== 'Filter' ? (
+        return path !== 'Filter' ? (
           isLast ? (
             <>
               {symbol}
               <Link className={styles.link} key={index}>
-                {' ' + pathname + ' '}
+                {' ' + path + ' '}
               </Link>
             </>
           ) : (
@@ -32,10 +32,10 @@ const NavigatePanel = ({ startFrom }) => {
               {symbol}
               <Link
                 key={index}
-                to={pathname !== 'Catalog' ? routeTo : '/catalog/filter'}
+                to={path !== 'Catalog' ? routeTo : '/catalog/filter'}
                 className={styles.link}
               >
-                {' ' + pathname + ' '}
+                {' ' + path + ' '}
               </Link>
             </>
           )

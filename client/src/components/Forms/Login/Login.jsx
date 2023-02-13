@@ -56,11 +56,11 @@ const Login = () => {
   }
 
   const SignInvalues = [
-    { placeholder: 'firstName', name: 'firstName' },
-    { placeholder: 'lastName', name: 'lastName' },
-    { placeholder: 'login', name: 'login' },
-    { placeholder: 'email', name: 'email' },
-    { placeholder: 'password', name: 'password' }
+    { placeholder: 'First Name', name: 'firstName' },
+    { placeholder: 'Last Name', name: 'lastName' },
+    { placeholder: 'Login', name: 'login' },
+    { placeholder: 'Email', name: 'email' },
+    { placeholder: 'Password', name: 'password' }
   ]
 
   return (

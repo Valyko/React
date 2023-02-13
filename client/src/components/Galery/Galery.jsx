@@ -19,7 +19,6 @@ const Galery = () => {
     minPrice,
     maxPrice
   } = useSelector(state => state.filter)
-  // const { products } = useSelector(state => state.filter.data)
   const sort = useSelector(state => state.filter.sort.sortProperty)
 
   const isSearch = useRef(false)
