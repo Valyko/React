@@ -16,7 +16,6 @@ import {
 } from './store/wishlist/ActionCreator'
 import { useLocation } from 'react-router-dom'
 import { fetchGetUser } from './store/user/ActionCreators'
-import { createBrowserHistory } from 'history'
 import { setLocation } from './store/location/location'
 import { clearStatusOrder } from './store/order/order'
 import UpToTop from './components/UpToTop/UpToTop'
@@ -27,18 +26,17 @@ function App() {
   const locationHook = useLocation()
   const favItems = useSelector(state => state.wishlist.data)
   const { location } = useSelector(state => state.location)
-  const history = createBrowserHistory()
   const cardInCart = useSelector(state => state.cart.data)
 
   useEffect(() => {
-    dispatch(setLocation(history.location.pathname))
+    dispatch(setLocation(locationHook.pathname))
     dispatch(fetchProducts())
     if (localStorage.getItem('userToken')) {
       const data = JSON.parse(localStorage.getItem('userToken'))
       dispatch(login(data.token))
     }
     dispatch(clearStatusOrder())
-  }, [dispatch, locationHook, history.location.pathname])
+  }, [dispatch, locationHook])
 
   useEffect(() => {
     if (token) {
