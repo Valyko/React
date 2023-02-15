@@ -7,7 +7,7 @@ import {
 } from './ActionCreators'
 
 const initialState = {
-  data: {},
+  data: [],
   status: null,
   error: null
 }
@@ -23,7 +23,18 @@ export const orderSlice = createSlice({
   extraReducers: builder => {
     extraReducer(builder, fetchMakeOrder, initialState)
     extraReducer(builder, getOrdersUser, initialState)
-    extraReducer(builder, fetchDeleteOrder, initialState)
+    builder.addCase(fetchDeleteOrder.pending, state => {
+      state.status = 'loading'
+      state.error = null
+    })
+    builder.addCase(fetchDeleteOrder.fulfilled, state => {
+      state.status = 'resolved'
+      state.error = null
+    })
+    builder.addCase(fetchDeleteOrder.rejected, (state, action) => {
+      state.status = 'rejected'
+      state.error = action.payload
+    })
   }
 })
 

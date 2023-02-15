@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchLogin } from '../../../store/login/ActionCreators'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import styles from './Login.module.scss'
 
 const initialValues = {
   email: '',
@@ -75,7 +76,7 @@ const Login = () => {
             {SignInvalues.map(value => {
               const { placeholder, name } = value
               return (
-                <div key={name}>
+                <div key={name} className={styles.forinput}>
                   <Field
                     name={name}
                     placeholder={placeholder}
