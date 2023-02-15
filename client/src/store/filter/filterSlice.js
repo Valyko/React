@@ -61,6 +61,14 @@ export const filterSlice = createSlice({
     },
     setMaxPrice(state, action) {
       state.maxPrice = action.payload
+    },
+    setResetFilters(state) {
+      state.categories = []
+      state.color = []
+      state.size = []
+      state.minPrice = '0'
+      state.maxPrice = '100'
+      state.sort = { sortName: '', sortProperty: [] }
     }
   },
   extraReducers: {
@@ -90,7 +98,8 @@ export const {
   setFilters,
   setInitialState,
   setMinPrice,
-  setMaxPrice
+  setMaxPrice,
+  setResetFilters
 } = filterSlice.actions
 
 export default filterSlice.reducer

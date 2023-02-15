@@ -7,6 +7,7 @@ import { fetchFilterProducts } from '../../store/filter/ActionCreators'
 import { useNavigate } from 'react-router-dom'
 import { sortOptions } from '../SortList/SortList'
 import './Galery.scss'
+import Title from '../Title/Title'
 
 const Galery = () => {
   const {
@@ -106,9 +107,9 @@ const Galery = () => {
   ])
 
   return (
-    <ul className='content-list'>
-      {products.products ? (
-        <>
+    <>
+      {products.products && products.products.length !== 0 ? (
+        <ul className='content-list'>
           {products.products.map(item => (
             <li key={item._id}>
               <ProductCard
@@ -123,9 +124,11 @@ const Galery = () => {
               />
             </li>
           ))}
-        </>
-      ) : null}
-    </ul>
+        </ul>
+      ) : (
+        <Title subtitle='There are no products matching the selected filters' />
+      )}
+    </>
   )
 }
 
