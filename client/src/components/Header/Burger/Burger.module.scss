@@ -10,9 +10,6 @@
   margin-left: 30px;
   border-left: 1px solid #dee6ed;
   padding-left: 15px;
-  &_page {
-    cursor: pointer;
-  }
   @include for-small-up {
     margin-left: 10px;
     padding-left: 0;
