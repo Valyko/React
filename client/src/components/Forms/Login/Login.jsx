@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchLogin } from '../../../store/login/ActionCreators'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import styles from './Login.module.scss'
 
 const initialValues = {
   email: '',
@@ -49,18 +50,18 @@ const Login = () => {
     if (statusSignIn === 'resolved' || token) {
       navigate('/')
     }
-  }, [statusSignIn, token])
+  }, [statusSignIn, token, navigate])
 
   const registerUser = value => {
     dispatch(fetchLogin(value))
   }
 
   const SignInvalues = [
-    { placeholder: 'firstName', name: 'firstName' },
-    { placeholder: 'lastName', name: 'lastName' },
-    { placeholder: 'login', name: 'login' },
-    { placeholder: 'email', name: 'email' },
-    { placeholder: 'password', name: 'password' }
+    { placeholder: 'First Name', name: 'firstName' },
+    { placeholder: 'Last Name', name: 'lastName' },
+    { placeholder: 'Login', name: 'login' },
+    { placeholder: 'Email', name: 'email' },
+    { placeholder: 'Password', name: 'password' }
   ]
 
   return (
@@ -75,7 +76,7 @@ const Login = () => {
             {SignInvalues.map(value => {
               const { placeholder, name } = value
               return (
-                <div key={name}>
+                <div key={name} className={styles.forinput}>
                   <Field
                     name={name}
                     placeholder={placeholder}

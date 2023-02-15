@@ -10,7 +10,7 @@
 .block {
   height: 80px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   flex-direction: column;
   &_input {
     height: 73px;

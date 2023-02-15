@@ -32,7 +32,7 @@ const SignIn = () => {
     } else if (status === 'rejected') {
       setVisibleError(true)
     }
-  }, [status, token])
+  }, [status, token, navigate])
 
   const loginUser = value => {
     dispatch(fetchSignIn(value))

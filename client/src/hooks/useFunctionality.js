@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { checkInCart, checkInFav } from '../store/counter/counter'
 import {
@@ -18,84 +18,104 @@ export const useFunctionality = id => {
   const token = useSelector(state => state.auth.token)
   const cardInCart = useSelector(state => state.cart.data)
   const cardInFav = useSelector(state => state.wishlist.data)
-  let values
+  const forCartActions = useRef(null)
+  const forFavActions = useRef(null)
+  const values = useRef(null)
+
+  const checkForDependency = useCallback(() => {
+    return token ? (cardInCart, cardInFav) : null
+  }, [cardInCart, cardInFav, token])
+
+  //static arrays
+  useMemo(() => {
+    forCartActions.current = {
+      localName: 'cart',
+      counter: checkInCart,
+      localState: setInCart,
+      valueLocalState: inCart,
+      deleteInServer: fetchDeleteFromCart,
+      addInServer: fetchAddToCart
+    }
+    forFavActions.current = {
+      localName: 'fav',
+      counter: checkInFav,
+      localState: setInFav,
+      valueLocalState: inFav,
+      deleteInServer: deleteItemFromWishlist,
+      addInServer: addToWishlist
+    }
+  }, [inCart, inFav])
+
+  //array selection depending on the specified value
+  const selectVarriable = useCallback(
+    value => {
+      if (value === 'fav') {
+        values.current = forFavActions
+      } else if (value === 'cart') {
+        values.current = forCartActions
+      }
+    },
+    [forFavActions, forCartActions]
+  )
+
+  //Check cards in cart and in wishlist from server and state change depending on the result of the check
+  const checkCards = useCallback(
+    (id, value) => {
+      let array
+      selectVarriable(value)
+      const { localState } = values.current.current
+      if (value === 'fav' ? cardInFav.length !== 0 : cardInCart.products) {
+        if (value === 'fav') {
+          array = cardInFav.products
+        } else if (value === 'cart') {
+          array = cardInCart.products.map(item => {
+            return item.product
+          })
+        }
+        const arrayId = array.map(item => {
+          return item._id
+        })
+        if (arrayId.includes(id)) {
+          localState(true)
+        }
+      }
+    },
+    [cardInCart.products, cardInFav.products, cardInFav.length, selectVarriable]
+  )
+
+  //check cards in cart and wishlist in localsorage
+  const checkCardsFromLocalStorage = useCallback(
+    value => {
+      selectVarriable(value)
+      const { localName, counter, localState } = values.current.current
+      const arrayFromLocalStorage = JSON.parse(localStorage.getItem(localName))
+      if (arrayFromLocalStorage) {
+        dispatch(counter(arrayFromLocalStorage.length))
+        arrayFromLocalStorage.forEach(item => {
+          if (item === id) {
+            localState(true)
+          }
+        })
+      }
+    },
+    [dispatch, id, selectVarriable, values]
+  )
 
   useEffect(() => {
     if (!token) {
       checkCardsFromLocalStorage('fav')
       checkCardsFromLocalStorage('cart')
     } else {
-      checkCards(id)
+      checkCards(id, 'cart')
+      checkCards(id, 'fav')
     }
-  }, [token, token ? (cardInCart, cardInFav) : null])
+  }, [token, checkForDependency, checkCards, checkCardsFromLocalStorage, id])
 
   const checkValue = value => {
     return value != null
   }
 
-  const forFavActions = {
-    localName: 'fav',
-    counter: checkInFav,
-    localState: setInFav,
-    valueLocalState: inFav,
-    deleteInServer: deleteItemFromWishlist,
-    addInServer: addToWishlist
-  }
-
-  const forCartActions = {
-    localName: 'cart',
-    counter: checkInCart,
-    localState: setInCart,
-    valueLocalState: inCart,
-    deleteInServer: fetchDeleteFromCart,
-    addInServer: fetchAddToCart
-  }
-
-  const selectVarriable = value => {
-    if (value === 'fav') {
-      return (values = forFavActions)
-    } else if (value === 'cart') {
-      return (values = forCartActions)
-    }
-  }
-
-  const checkCardsFromLocalStorage = value => {
-    selectVarriable(value)
-    const { localName, counter, localState } = values
-    const arrayFromLocalStorage = JSON.parse(localStorage.getItem(localName))
-    if (arrayFromLocalStorage) {
-      dispatch(counter(arrayFromLocalStorage.length))
-      arrayFromLocalStorage.forEach(item => {
-        if (item === id) {
-          localState(true)
-        }
-      })
-    }
-  }
-
-  const checkCards = id => {
-    if (cardInCart.products) {
-      const arrCard = cardInCart.products.map(item => {
-        return item.product
-      })
-      const arrCardId = arrCard.map(item => {
-        return item._id
-      })
-      if (arrCardId.includes(id)) {
-        setInCart(true)
-      }
-    }
-
-    if (cardInFav.length !== 0) {
-      const arrFavId = cardInFav.products.map(item => {
-        return item._id
-      })
-      if (arrFavId.includes(id)) {
-        setInFav(true)
-      }
-    }
-  }
-
+  //adding and removing card to the cart and wishlist on the server and localstorage, changing the counter
   const actionOnCkickFavOrCart = (id, value) => {
     selectVarriable(value)
     const {
@@ -105,7 +125,7 @@ export const useFunctionality = id => {
       valueLocalState,
       deleteInServer,
       addInServer
-    } = values
+    } = values.current.current
 
     if (!token) {
       if (localStorage.getItem(localName)) {
@@ -140,6 +160,7 @@ export const useFunctionality = id => {
     }
   }
 
+  //reduce the quantity of items in the cart by one
   const clickDeleteCardInCart = id => {
     if (token) {
       dispatch(fetchDeleteFromCart(id))
@@ -153,13 +174,14 @@ export const useFunctionality = id => {
       })
       const arrayWithoutIdFilter = arrayWithoutId.filter(checkValue)
       const arrayIdFilter = arrayId.filter(checkValue)
-      const deleteId = arrayIdFilter.shift()
+      arrayIdFilter.shift()
       const newArrayCart = arrayWithoutIdFilter.concat(arrayIdFilter)
       dispatch(checkInCart(newArrayCart.length))
       localStorage.setItem('cart', JSON.stringify(newArrayCart))
     }
   }
 
+  //removal item from cart
   const clickDeleteProductInCart = id => {
     if (token) {
       dispatch(fetchDeletaCardFromCart(id))
@@ -176,6 +198,7 @@ export const useFunctionality = id => {
     }
   }
 
+  //increase the quantity of items in the cart by one
   const clickAddInCart = () => {
     if (token) {
       dispatch(fetchAddToCart(id))

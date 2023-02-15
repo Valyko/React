@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { ReactComponent as User } from './svg/user.svg'
 import { ReactComponent as Cart } from './svg/cart.svg'
@@ -20,7 +20,7 @@ import { useRef } from 'react'
 
 const Header = () => {
   const [menu, setMenu] = useState(false)
-  const [searchView, setSearchView] = useState()
+  const [searchView, setSearchView] = useState(false)
   const { inFav, inCart } = useSelector(state => state.counter)
   const token = useSelector(state => state.auth.token)
   const dispatch = useDispatch()
@@ -43,9 +43,9 @@ const Header = () => {
     setMenu(!menu)
   }
 
-  const clickSearch = () => {
+  const clickSearch = useCallback(() => {
     setSearchView(!searchView)
-  }
+  }, [searchView])
 
   useEffect(() => {
     if (searchView) {
@@ -57,7 +57,7 @@ const Header = () => {
       document.addEventListener('mousedown', handleClick)
       return () => document.removeEventListener('mousedown', handleClick)
     }
-  }, [searchView])
+  }, [searchView, clickSearch])
 
   const logOut = () => {
     dispatch(logout())
@@ -82,7 +82,10 @@ const Header = () => {
           <NavLink to={token ? '/profile' : '/signin'}>
             <User style={{ cursor: 'pointer' }} />
           </NavLink>
-          <Search onClick={() => clickSearch()} style={{ cursor: 'pointer' }} />
+          <Search
+            onClick={!searchView ? () => clickSearch() : null}
+            style={{ cursor: 'pointer' }}
+          />
           <NavLink to='/fav'>
             <Fav />
             {inFav ? <Count count={inFav} /> : null}

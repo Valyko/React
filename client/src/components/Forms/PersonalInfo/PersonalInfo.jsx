@@ -32,14 +32,14 @@ const validationSchema = yup.object().shape({
 const PersonalInfo = () => {
   const dispatch = useDispatch()
   const info = useSelector(state => state.user.data)
-  const statusUpdate = useSelector(state => state.user.status)
+  const statusUpdate = useSelector(state => state.user.statusUpdate)
   const [visibleError, setVisibleError] = useState(false)
   const [visibleSuccess, setVisibleSuccess] = useState(false)
   const { location } = useSelector(state => state.location)
 
   useEffect(() => {
     dispatch(clearStatusUpdate())
-  }, [location])
+  }, [location, dispatch])
 
   useEffect(() => {
     if (statusUpdate === 'rejected') {

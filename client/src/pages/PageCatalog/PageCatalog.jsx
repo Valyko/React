@@ -88,7 +88,7 @@ const PageCatalog = () => {
             <Title
               title='Category'
               showContent={showCategory}
-              className={'active'}
+              className={'active for_catalog'}
             />
             <Category
               categoryActive={
@@ -98,12 +98,16 @@ const PageCatalog = () => {
             <Title
               title='Colors'
               showContent={showColor}
-              className={'active'}
+              className={'active for_catalog'}
             />
             <Colors
               contentActive={currentWidth < 768 ? !colorActive : colorActive}
             />
-            <Title title='Sizes' showContent={showSizes} className={'active'} />
+            <Title
+              title='Sizes'
+              showContent={showSizes}
+              className={'active for_catalog'}
+            />
             <Sizes
               sizesActive={currentWidth < 768 ? !sizesActive : sizesActive}
             />

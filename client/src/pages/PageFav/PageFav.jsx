@@ -9,7 +9,7 @@ import BreadCrumbs from '../../components/BreadCrumbs'
 const PageFav = () => {
   const products = useSelector(state => state.products)
   const favCounter = useSelector(state => state.counter.inFav)
-  const { data, loading, error } = useSelector(state => state.wishlist)
+  const { data, loading } = useSelector(state => state.wishlist)
   const token = useSelector(state => state.auth.token)
 
   const findItemsFav = () => {

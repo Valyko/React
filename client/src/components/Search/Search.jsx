@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { searchFor } from '../../store/searchProducts/ActionCreator'
 import ProductCard from '../ProductCard'
@@ -16,7 +16,7 @@ const SearchForm = ({ reff }) => {
     } else {
       dispatch(searchFor(' '))
     }
-  }, [query])
+  }, [query, dispatch])
 
   const changeMeQuery = event => {
     setQuery(event.target.value)

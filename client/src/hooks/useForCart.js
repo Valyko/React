@@ -1,4 +1,3 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 
 export const useForCart = () => {
@@ -54,7 +53,7 @@ export const useForCart = () => {
     let counter = 0
 
     for (let elem of itemsinCart) {
-      if (elem == value) {
+      if (elem === value) {
         counter++
       }
     }

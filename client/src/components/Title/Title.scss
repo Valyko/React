@@ -6,7 +6,7 @@
     cursor: pointer;
   }
 }
-.mt-4 {
+.for_catalog {
   @include for-medium-up {
     margin-top: 0 !important;
   }
@@ -16,5 +16,6 @@
   display: none;
   @include for-medium-up {
     display: block;
+    cursor: pointer;
   }
 }

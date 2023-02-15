@@ -2,37 +2,38 @@
 @import '../../../styles/breakpoints.scss';
 
 .burger {
-    display: none;
-    margin-left: 30px;
-    &_page {
-      cursor: pointer;
-    }
-    @include for-large-up {
-      display: block;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-    }
-    @include for-small-up {
-      margin-left: 10px;
-    }
-    &_btn {
-      width: 32px;
-      height: 11px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-end;
-      &_line {
-        height: 1.5px;
-        background-color: #2d4153;
-        &:first-child {
-          width: 32px;
-        }
-        &:last-child {
-          width: 22px;
-        }
+  display: block;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 30px;
+  border-left: 1px solid #dee6ed;
+  padding-left: 15px;
+  &_page {
+    cursor: pointer;
+  }
+  @include for-small-up {
+    margin-left: 10px;
+    padding-left: 0;
+    border-left: 0;
+  }
+  &_btn {
+    width: 32px;
+    height: 11px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    &_line {
+      height: 1.5px;
+      background-color: #2d4153;
+      &:first-child {
+        width: 32px;
+      }
+      &:last-child {
+        width: 22px;
       }
     }
   }
+}

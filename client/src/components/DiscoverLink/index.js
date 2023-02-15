@@ -1,2 +1,1 @@
-import DiscoverLink from '.DiscoverLink';
-export default DiscoverLink;
+export { default } from './DiscoverLink'
