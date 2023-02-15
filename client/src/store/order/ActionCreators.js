@@ -19,8 +19,8 @@ export const fetchMakeOrder = createAsyncThunk(
           customerId: customerId,
           email: value.email,
           mobile: value.telephone,
-          letterSubject: 'sdfs',
-          letterHtml: 'sfedfs',
+          letterSubject: 'Thank you for order.',
+          letterHtml: '<h1>Your order is placed</h1>',
           status: 'not shipped',
           canceled: false
           // deliveryAddress: {

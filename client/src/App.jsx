@@ -1,7 +1,6 @@
 import { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from './store/products/ActionCreators'
-import { login } from './store/tokenWork/tokenWork'
 import {
   fetchGetAllFromCart,
   fetchUpdateCart
@@ -32,8 +31,7 @@ function App() {
     dispatch(setLocation(locationHook.pathname))
     dispatch(fetchProducts())
     if (localStorage.getItem('userToken')) {
-      const data = JSON.parse(localStorage.getItem('userToken'))
-      dispatch(login(data.token))
+      localStorage.removeItem('userToken')
     }
     dispatch(clearStatusOrder())
   }, [dispatch, locationHook])
