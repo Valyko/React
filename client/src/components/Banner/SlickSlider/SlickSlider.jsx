@@ -7,7 +7,7 @@ import { fetchSlides } from '../../../store/slides/ActionCreators'
 
 const SlickSlider = () => {
   const dispatch = useDispatch()
-  const slides = useSelector(state => state.slides)
+  const slides = useSelector(state => state.slides.data)
 
   const settings = {
     dots: false,
@@ -28,7 +28,7 @@ const SlickSlider = () => {
     <div className='container'>
       {slides && (
         <Slider {...settings}>
-          {slides.data.map(item =>
+          {slides.map(item =>
             item.imageUrl.map(url => <img src={url} alt='banner' />)
           )}
         </Slider>
