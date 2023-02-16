@@ -13,14 +13,14 @@ import BreadCrumbs from '../../components/BreadCrumbs'
 export const PageItem = () => {
   const { itemNo } = useParams()
   const dispatch = useDispatch()
-  const { card, isCardLoading, cardError } = useSelector(state => state.card)
-  const { imageUrls, name, currentPrice, size, color, _id } = card
+  const { data, loading, error } = useSelector(state => state.card)
+  const { imageUrls, name, currentPrice, size, color, _id } = data
 
   useEffect(() => {
     dispatch(fetchCard(itemNo))
   }, [dispatch, itemNo])
 
-  useEffect(() => {}, [card])
+  useEffect(() => {}, [data])
 
   const settings = {
     dots: true,
@@ -36,10 +36,10 @@ export const PageItem = () => {
   return (
     <div className='container page'>
       <BreadCrumbs startFrom='Home' />
-      {isCardLoading ? (
+      {loading ? (
         <Loader />
-      ) : cardError ? (
-        <Title subtitle='Smth wrong happened' />
+      ) : error ? (
+        <Title subtitle={error} />
       ) : (
         <div className='my-5 d-flex flex-column flex-md-row gap-5 justify-content-center'>
           <div className='sliderImg'>
