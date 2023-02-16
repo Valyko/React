@@ -7,14 +7,12 @@ import Loader from '../Loader'
 
 const SearchForm = ({ reff }) => {
   const [query, setQuery] = useState('')
-  const { searchValues, isSearching } = useSelector(state => state.search)
+  const { data, loading } = useSelector(state => state.search)
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (query) {
       dispatch(searchFor(query))
-    } else {
-      dispatch(searchFor(' '))
     }
   }, [query, dispatch])
 
@@ -33,10 +31,10 @@ const SearchForm = ({ reff }) => {
           />
         </div>
         <div>
-          {isSearching ? (
+          {loading ? (
             <Loader />
-          ) : searchValues.length ? (
-            searchValues.map(searchValue => {
+          ) : data.length ? (
+            data.map(searchValue => {
               return (
                 <ProductCard
                   ident={searchValue.itemNo}

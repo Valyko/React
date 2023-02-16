@@ -11,8 +11,9 @@ const Checkbox = ({
 }) => {
   return (
     <>
-      <div className='form-check' onChange={onChangeCheckbox}>
+      <div className='form-check'>
         <input
+          onChange={onChangeCheckbox}
           className='form-check-input'
           type='checkbox'
           value={label}

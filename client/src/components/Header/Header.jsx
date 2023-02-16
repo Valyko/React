@@ -17,6 +17,7 @@ import SearchForm from '../Search'
 import { useEffect } from 'react'
 import { clearStatus } from '../../store/signIn/signIn'
 import { useRef } from 'react'
+import { clearSearch } from '../../store/searchProducts/searchSlice'
 
 const Header = () => {
   const [menu, setMenu] = useState(false)
@@ -52,12 +53,13 @@ const Header = () => {
       const handleClick = e => {
         if (!tooltipRef.current.contains(e.target)) {
           clickSearch()
+          dispatch(clearSearch())
         }
       }
       document.addEventListener('mousedown', handleClick)
       return () => document.removeEventListener('mousedown', handleClick)
     }
-  }, [searchView, clickSearch])
+  }, [searchView, clickSearch, dispatch])
 
   const logOut = () => {
     dispatch(logout())

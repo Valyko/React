@@ -18,10 +18,6 @@ const Pagination = () => {
   const [pages, setPages] = useState([])
 
   useEffect(() => {
-    dispatch(setstartPage(1))
-  })
-
-  useEffect(() => {
     setPages(filler(pagesCount))
   }, [pagesCount])
 
