@@ -1,15 +1,9 @@
-.forinput {
-  height: 73px;
-}
 .block_btn {
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  height: 100px;
   span {
     margin-bottom: 5px;
-  }
-  button.for_login {
-    margin: 0;
   }
 }

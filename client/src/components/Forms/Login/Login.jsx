@@ -27,8 +27,16 @@ const validationSchema = yup.object().shape({
     .string()
     .required('No password provided.')
     .min(8, 'Password is too short'),
-  firstName: yup.string().required('Name is required'),
-  lastName: yup.string().required('LastName is required'),
+  firstName: yup
+    .string()
+    .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
+    .min(3, 'Too short')
+    .required('Name is required'),
+  lastName: yup
+    .string()
+    .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
+    .min(3, 'Too short')
+    .required('LastName is required'),
   login: yup.string().required('Login is required')
 })
 
@@ -36,6 +44,7 @@ const Login = () => {
   const dispatch = useDispatch()
   const statusSignIn = useSelector(state => state.signIn.status)
   const statusLogin = useSelector(state => state.login.status)
+  const errorMessage = useSelector(state => state.login.error)
   const navigate = useNavigate()
   const [visibleError, setVisibleError] = useState(false)
   const token = useSelector(state => state.auth.token)
@@ -90,10 +99,16 @@ const Login = () => {
                 </div>
               )
             })}
-            {visibleError && (
-              <span style={{ color: 'red' }}>User already exists</span>
-            )}
-            <Button text='Create User' disabled={!values.name} type='submit' />
+            <div className={styles.block_btn}>
+              {visibleError && (
+                <span style={{ color: 'red' }}>{errorMessage}</span>
+              )}
+              <Button
+                text='Create User'
+                disabled={!values.name}
+                type='submit'
+              />
+            </div>
           </Form>
         )
       }}

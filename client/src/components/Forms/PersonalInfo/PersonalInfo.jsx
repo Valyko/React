@@ -19,8 +19,16 @@ const validationSchema = yup.object().shape({
     .email('Not an Email')
     .required('Email is a required field')
     .min(8, 'Too short'),
-  firstName: yup.string().required('Name is required'),
-  lastName: yup.string().required('LastName is required'),
+  firstName: yup
+    .string()
+    .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
+    .min(3, 'Too short')
+    .required('Name is required'),
+  lastName: yup
+    .string()
+    .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
+    .min(3, 'Too short')
+    .required('LastName is required'),
   telephone: yup
     .string()
     .required('required')
