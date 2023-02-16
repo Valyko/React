@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchSignIn } from '../../../store/signIn/ActionCreators'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import styles from './SignIn.module.scss'
 
 const initialValues = {
   loginOrEmail: '',
@@ -22,7 +23,7 @@ const validationSchema = yup.object().shape({
 const SignIn = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const status = useSelector(state => state.signIn.status)
+  const { status, error } = useSelector(state => state.signIn)
   const [visibleError, setVisibleError] = useState(false)
   const token = useSelector(state => state.auth.token)
 
@@ -69,12 +70,10 @@ const SignIn = () => {
                 </div>
               )
             })}
-            {visibleError && (
-              <span style={{ color: 'red' }}>
-                Wrong login or password. Try again.
-              </span>
-            )}
-            <Button text='Sign in' disabled={!values.name} type='submit' />
+            <div className={styles.block_btn}>
+              {visibleError && <span style={{ color: 'red' }}>{error}</span>}
+              <Button text='Sign in' disabled={!values.name} type='submit' />
+            </div>
           </Form>
         )
       }}

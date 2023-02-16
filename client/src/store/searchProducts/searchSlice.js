@@ -1,30 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit'
+import extraReducer from '../ExtraReducer'
 import { searchFor } from './ActionCreator'
 
 const initialState = {
-  searchValues: [],
-  isSearching: false,
-  searchError: ''
+  data: [],
+  loading: false,
+  error: ''
 }
 
 export const SearchSlice = createSlice({
   name: 'search',
   initialState,
+  reducers: {
+    clearSearch: state => {
+      state.data = []
+      state.loading = false
+      state.error = ''
+    }
+  },
   extraReducers: builder => {
-    builder
-      .addCase(searchFor.fulfilled, (state, action) => {
-        state.isSearching = false
-        state.searchError = ''
-        state.searchValues = action.payload
-      })
-      .addCase(searchFor.pending, state => {
-        state.isSearching = true
-      })
-      .addCase(searchFor.rejected, (state, action) => {
-        state.isSearching = false
-        state.searchError = action.payload
-      })
+    extraReducer(builder, searchFor, initialState)
   }
 })
-
+export const { clearSearch } = SearchSlice.actions
 export default SearchSlice.reducer

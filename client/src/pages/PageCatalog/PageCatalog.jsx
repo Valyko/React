@@ -8,21 +8,12 @@ import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs'
 import Button from '../../components/Button'
 import Galery from '../../components/Galery'
 import SortList from '../../components/SortList'
-import {
-  setstartPage,
-  setperPage,
-  setMinPrice,
-  setMaxPrice
-} from '../../store/filter/filterSlice'
+import { setstartPage, setperPage } from '../../store/filter/filterSlice'
 import Pagination from '../../components/Pagination'
 import './PageCatalog.scss'
-import MinMaxFilter from '../../components/MinMaxFilter'
 
 const PageCatalog = () => {
-  const { products, startPage, perPage, minPrice, maxPrice } = useSelector(
-    state => state.filter
-  )
-  // const products = useSelector(state => state.filter.data.products)
+  const { products, startPage, perPage } = useSelector(state => state.filter)
   const pagesCount = Math.ceil(products.productsQuantity / perPage)
   const currentWidth = useWindowSize()
 
@@ -54,19 +45,6 @@ const PageCatalog = () => {
     currentWidth < 768 ? dispatch(setperPage(6)) : dispatch(setperPage(6))
     currentWidth < 768 ? setfiltersIsOpen(false) : setfiltersIsOpen(true)
   }, [currentWidth, dispatch])
-
-  const handleChangeMin = event => {
-    dispatch(setMinPrice(event.target.value))
-  }
-  const handleChangeMax = event => {
-    dispatch(setMaxPrice(event.target.value))
-  }
-
-  const handleInput = event => {
-    dispatch(setMinPrice(event[0]))
-    dispatch(setMaxPrice(event[1]))
-    dispatch(setstartPage(1))
-  }
 
   const LoadMore = () => {
     dispatch(setstartPage(1))
@@ -110,13 +88,6 @@ const PageCatalog = () => {
             />
             <Sizes
               sizesActive={currentWidth < 768 ? !sizesActive : sizesActive}
-            />
-            <MinMaxFilter
-              minPrice={minPrice}
-              maxPrice={maxPrice}
-              onChange={event => handleInput(event)}
-              onChangeInputMin={event => handleChangeMin(event)}
-              onChangeInputMax={event => handleChangeMax(event)}
             />
           </aside>
         )}

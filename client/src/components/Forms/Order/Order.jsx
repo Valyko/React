@@ -23,10 +23,19 @@ const validationSchema = yup.object().shape({
     .matches(phoneRegExp, 'Phone number is not valid')
     .min(10, 'too short')
     .max(13, 'too long'),
-  country: yup.string().required('Country is required'),
-  city: yup.string().required('Sity is required'),
+  country: yup
+    .string()
+    .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
+    .required('Country is required'),
+  city: yup
+    .string()
+    .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
+    .required('Sity is required'),
   zipCode: yup.number().required('ZIP Code is required').min(4, 'Too short'),
-  adress: yup.string().required('Adress is required')
+  adress: yup
+    .string()
+    .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
+    .required('Adress is required')
 })
 
 const Order = ({ createOrder }) => {

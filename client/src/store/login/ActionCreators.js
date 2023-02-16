@@ -19,7 +19,9 @@ export const fetchLogin = createAsyncThunk(
         }
       })
       if (!respons.ok) {
-        throw new Error('Server Error!')
+        const data = await respons.json()
+        const keys = Object.keys(data)
+        throw new Error(data[keys[0]])
       }
       const data = await respons.json()
       dispatch(
