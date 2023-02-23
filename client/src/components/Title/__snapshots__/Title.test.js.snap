@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Title Title is render 1`] = `<DocumentFragment />`;
+
+exports[`Title Title with showContent 1`] = `<DocumentFragment />`;

@@ -22,9 +22,13 @@ const Menu = ({ closeFunc }) => {
         </div>
         <div className={styles.menu__body_list}>
           <div>
-            {arr.map(value => {
+            {arr.map((value, index) => {
               const { option, link } = value
-              return <NavLink to={link}> {option} </NavLink>
+              return (
+                <NavLink to={link} key={index}>
+                  {option}
+                </NavLink>
+              )
             })}
           </div>
         </div>

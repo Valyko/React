@@ -21,23 +21,19 @@ const NavigatePanel = ({ startFrom }) => {
 
         return path !== 'Filter' ? (
           isLast ? (
-            <>
+            <Link className={styles.link} key={index}>
               {symbol}
-              <Link className={styles.link} key={index}>
-                {' ' + path + ' '}
-              </Link>
-            </>
+              {' ' + path + ' '}
+            </Link>
           ) : (
-            <>
+            <Link
+              key={index}
+              to={path !== 'Catalog' ? routeTo : '/catalog/filter'}
+              className={styles.link}
+            >
               {symbol}
-              <Link
-                key={index}
-                to={path !== 'Catalog' ? routeTo : '/catalog/filter'}
-                className={styles.link}
-              >
-                {' ' + path + ' '}
-              </Link>
-            </>
+              {' ' + path + ' '}
+            </Link>
           )
         ) : null
       })}

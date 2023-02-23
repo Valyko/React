@@ -29,17 +29,13 @@ const Pagination = () => {
     <div className='pages'>
       {pages.length !== 0 &&
         pages.map((page, index) => (
-          <>
-            <span
-              key={page}
-              className={
-                startPage === page ? 'start-page-number' : 'page-number'
-              }
-              onClick={() => dispatch(setstartPage(page))}
-            >
-              {page}
-            </span>
-          </>
+          <span
+            key={index}
+            className={startPage === page ? 'start-page-number' : 'page-number'}
+            onClick={() => dispatch(setstartPage(page))}
+          >
+            {page}
+          </span>
         ))}
     </div>
   )

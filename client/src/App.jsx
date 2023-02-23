@@ -20,6 +20,7 @@ function App() {
   const token = useSelector(state => state.auth.token)
   const locationHook = useLocation()
   const { location } = useSelector(state => state.location)
+  const statusUser = useSelector(state => state.user.status)
   const { sendItemsFromLocalStorageCart, sendItemsFromLocalStorageWishlist } =
     useForApp()
 
@@ -36,11 +37,15 @@ function App() {
 
   useEffect(() => {
     if (token) {
-      dispatch(fetchGetUser())
-      dispatch(fetchWishlist())
-      dispatch(fetchGetAllFromCart())
+      if (statusUser === 'rejected') {
+        dispatch(login(''))
+        localStorage.removeItem('userToken')
+      } else {
+        dispatch(fetchWishlist())
+        dispatch(fetchGetAllFromCart())
+      }
     }
-  }, [token, dispatch])
+  }, [token, statusUser, dispatch])
 
   useEffect(() => {
     if (token) {
