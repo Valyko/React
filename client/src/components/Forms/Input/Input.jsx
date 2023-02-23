@@ -62,7 +62,10 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
-  field: PropTypes.object
+  field: PropTypes.object,
+  show: PropTypes.bool,
+  showPass: PropTypes.func,
+  checkIcon: PropTypes.bool
 }
 
 export default Input

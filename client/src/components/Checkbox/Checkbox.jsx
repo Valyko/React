@@ -20,7 +20,7 @@ const Checkbox = ({
           id={id}
           defaultChecked={isActive}
         />
-        <label className='form-check-label' htmlFor={id}>
+        <label className='form-check-label'>
           {colorSquare && (
             <div className={'color-square ' + classForSquare}></div>
           )}

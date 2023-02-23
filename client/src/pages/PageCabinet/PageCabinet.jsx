@@ -34,12 +34,13 @@ const PageCabinet = () => {
     }
   }
 
-  const visibleMenu = () => {
+  const visibleModal = () => {
     setModal(!modal)
   }
 
   const deleteOrder = id => {
     dispatch(fetchDeleteOrder(id))
+    visibleModal()
   }
 
   return (
@@ -120,7 +121,7 @@ const PageCabinet = () => {
                           </div>
                           <div className={styles.container_cards_info_block}>
                             <p
-                              onClick={visibleMenu}
+                              onClick={visibleModal}
                               style={{ cursor: 'pointer' }}
                             >
                               DELETE ORDER
@@ -131,7 +132,7 @@ const PageCabinet = () => {
                     </div>
                     {modal && (
                       <Modal
-                        close={visibleMenu}
+                        close={visibleModal}
                         text='Are you sure you want to delete the order?'
                         actions={[
                           <Button
@@ -141,7 +142,7 @@ const PageCabinet = () => {
                           />,
                           <Button
                             text='No'
-                            onClick={visibleMenu}
+                            onClick={visibleModal}
                             className={styles.btn}
                           />
                         ]}
