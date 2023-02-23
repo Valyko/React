@@ -26,6 +26,8 @@ const ChangePassword = () => {
   const [visibleErrorMatch, setVisibleErrorMatch] = useState(false)
   const [visibleError, setVisibleError] = useState(false)
   const [visibleResolve, setVisibleResolve] = useState(false)
+  const [typeForPass, setTypeForPasss] = useState('password')
+  const [typeForPassNew, setTypeForPasssNew] = useState('password')
   const { location } = useSelector(state => state.location)
 
   const initialValues = { newPassword: '', password: '' }
@@ -55,13 +57,23 @@ const ChangePassword = () => {
   const updateValues = value => {
     dispatch(fetchChangePassword(value))
   }
+  const showPass = value => {
+    value === 'old'
+      ? typeForPass === 'password'
+        ? setTypeForPasss('text')
+        : setTypeForPasss('password')
+      : typeForPassNew === 'password'
+      ? setTypeForPasssNew('text')
+      : setTypeForPasssNew('password')
+  }
 
   const personalValues = [
     {
       placeholder: 'Old password',
-      name: 'password'
+      name: 'password',
+      type: typeForPass
     },
-    { placeholder: 'New password', name: 'newPassword' }
+    { placeholder: 'New password', name: 'newPassword', type: typeForPassNew }
   ]
 
   return (
@@ -75,7 +87,7 @@ const ChangePassword = () => {
           return (
             <Form className={styles.form}>
               {personalValues.map(value => {
-                const { placeholder, name } = value
+                const { placeholder, name, type } = value
                 return (
                   <div key={name} className={styles.block_input}>
                     <Field
@@ -83,7 +95,22 @@ const ChangePassword = () => {
                       placeholder={placeholder}
                       id={name}
                       component={Input}
-                      type='password'
+                      type={type}
+                      show
+                      showPass={
+                        name === 'password'
+                          ? () => showPass('old')
+                          : () => showPass('new')
+                      }
+                      checkIcon={
+                        name === 'password'
+                          ? typeForPass === 'password'
+                            ? true
+                            : false
+                          : typeForPassNew === 'password'
+                          ? true
+                          : false
+                      }
                     />
                     <span>
                       <ErrorMessage name={name} />
