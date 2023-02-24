@@ -70,9 +70,6 @@
         @include for-small-up {
           height: 15px;
           margin: 0 9px;
-          // &:nth-child(3) {
-          //   display: none;
-          // }
         }
         @media (max-width: 400px) {
           margin: 0 3px;
