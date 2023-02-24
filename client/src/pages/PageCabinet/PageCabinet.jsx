@@ -21,6 +21,7 @@ const PageCabinet = () => {
   const [info, setInfo] = useState(true)
   const [orderVis, setOrderVis] = useState(false)
   const [modal, setModal] = useState(false)
+  const [idOrder, setIdOrder] = useState(null)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -38,6 +39,10 @@ const PageCabinet = () => {
     setModal(!modal)
   }
 
+  const setIdOrderFunc = id => {
+    setIdOrder(id)
+  }
+
   const deleteOrder = id => {
     dispatch(fetchDeleteOrder(id))
     visibleModal()
@@ -50,13 +55,13 @@ const PageCabinet = () => {
         <div className={styles.menu}>
           <p
             onClick={() => visible(info)}
-            className={`${info ? styles.active : null}`}
+            className={info ? styles.active : null}
           >
             Personal info
           </p>
           <p
             onClick={() => visible(orderVis)}
-            className={`${orderVis ? styles.active : null}`}
+            className={orderVis ? styles.active : null}
           >
             My orders
           </p>
@@ -121,7 +126,10 @@ const PageCabinet = () => {
                           </div>
                           <div className={styles.container_cards_info_block}>
                             <p
-                              onClick={visibleModal}
+                              onClick={() => {
+                                visibleModal()
+                                setIdOrderFunc(item._id)
+                              }}
                               style={{ cursor: 'pointer' }}
                             >
                               DELETE ORDER
@@ -137,11 +145,13 @@ const PageCabinet = () => {
                         actions={[
                           <Button
                             text='Yes'
-                            onClick={() => deleteOrder(item._id)}
+                            key='1'
+                            onClick={() => deleteOrder(idOrder)}
                             className={styles.btn}
                           />,
                           <Button
                             text='No'
+                            key='2'
                             onClick={visibleModal}
                             className={styles.btn}
                           />
