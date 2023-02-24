@@ -14,6 +14,7 @@ import ProductCard from '../../components/ProductCard/ProductCard'
 import BreadCrumbs from '../../components/BreadCrumbs'
 import Modal from '../../components/Modal'
 import Button from '../../components/Button'
+import Container from '../../components/Container'
 
 const PageCabinet = () => {
   const userInfo = useSelector(state => state.user.data)
@@ -49,7 +50,7 @@ const PageCabinet = () => {
   }
 
   return (
-    <div className='container py-5 page'>
+    <Container>
       <BreadCrumbs startFrom='Home' />
       <div className={styles.block}>
         <div className={styles.menu}>
@@ -82,7 +83,10 @@ const PageCabinet = () => {
               {order.length !== 0 &&
                 order.map(item => (
                   <div key={item._id}>
-                    <Title title={`${'№ ' + item._id}`} />
+                    <Title
+                      title={`${'№ ' + item._id}`}
+                      className={styles.title}
+                    />
                     <div className={styles.container}>
                       <div className={styles.information}></div>
                       <div className={styles.container_cards}>
@@ -164,7 +168,7 @@ const PageCabinet = () => {
           )}
         </div>
       </div>
-    </div>
+    </Container>
   )
 }
 

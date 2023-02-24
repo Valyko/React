@@ -1,24 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import './Title.scss'
+import styles from './Title.module.scss'
 
 const Title = ({ title, subtitle, showContent, className }) => {
   return (
     <>
       {title && (
-        <div className={`row mt-4 ${className}`}>
-          <div className='col text-uppercase secondaryColor'>
-            <h5 onClick={showContent}> {title}</h5>
-          </div>
-        </div>
+        <h5 onClick={showContent} className={styles.title + ' ' + className}>
+          {title}
+        </h5>
       )}
-      {subtitle && (
-        <div className='row my-4'>
-          <div className='col'>
-            <h2 className='fs-1'>{subtitle}</h2>
-          </div>
-        </div>
-      )}
+      {subtitle && <h1 className={styles.subtitle}>{subtitle}</h1>}
     </>
   )
 }

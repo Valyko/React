@@ -11,6 +11,7 @@ import AlsoLike from '../../components/AlsoLike'
 import ThanksForOrder from './ThanksForOrder'
 import { useEffect } from 'react'
 import LoggedBlock from '../../components/LoggedBlock'
+import Container from '../../components/Container'
 
 const PageCheckout = () => {
   const cardInCart = useSelector(state => state.cart.data)
@@ -31,11 +32,11 @@ const PageCheckout = () => {
     dispatch(fetchMakeOrder({ value, cardInCart }))
   }
   return token ? (
-    <>
+    <Container>
       {orderDone ? (
         <ThanksForOrder />
       ) : cartCounter.inCart ? (
-        <div className='container'>
+        <>
           <Title subtitle='Checkout' />
           <div className={styles.checkout}>
             <div className={styles.checkout_block}>
@@ -50,15 +51,15 @@ const PageCheckout = () => {
               />
             </div>
           </div>
-        </div>
+        </>
       ) : (
-        <div className={'container ' + styles.block}>
+        <div className={styles.block}>
           <Title subtitle='No items for order. Return to catalog' />
           <Button text='To catalot' to='/catalog' />
           <AlsoLike />
         </div>
       )}
-    </>
+    </Container>
   ) : (
     <LoggedBlock checkout />
   )

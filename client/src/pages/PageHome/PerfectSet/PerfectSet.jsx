@@ -18,7 +18,7 @@ const PerfectSet = () => {
   }, [products.data, productsCount])
 
   return (
-    <div className='container'>
+    <section>
       <Title title='new arrivals' subtitle='Choose your perfect set' />
       {products.data ? (
         products.status === 'loading' ? (
@@ -40,11 +40,11 @@ const PerfectSet = () => {
                   size={item.size}
                 />
               ))}
-            <DiscoverLink subClass={'set-link set-item'} />
+            <DiscoverLink subClass={'set-link set-item'} to='/catalog/filter' />
           </section>
         )
       ) : null}
-    </div>
+    </section>
   )
 }
 export default PerfectSet

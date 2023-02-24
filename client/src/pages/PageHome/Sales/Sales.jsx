@@ -18,7 +18,7 @@ const Sales = () => {
   }, [products.data, productsCount])
 
   return (
-    <div className='container'>
+    <section>
       <Title title='Sales and promotions' subtitle='Catch the best price' />
       {products.data ? (
         products.status === 'loading' ? (
@@ -40,11 +40,11 @@ const Sales = () => {
                   size={item.size}
                 />
               ))}
-            <DiscoverLink subClass={'sales-link '} />
+            <DiscoverLink subClass={'sales-link '} to='/catalog/filter' />
           </section>
         )
       ) : null}
-    </div>
+    </section>
   )
 }
 export default Sales
