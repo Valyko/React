@@ -27,7 +27,8 @@ const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useSelector(state => state.location.location)
-  const tooltipRef = useRef(null)
+  const refSearch = useRef(null)
+  const refMenu = useRef(null)
 
   useEffect(() => {
     setSearchView(false)
@@ -40,9 +41,9 @@ const Header = () => {
       : document.body.classList.remove('body_active')
   }, [menu])
 
-  const clickMenu = () => {
+  const clickMenu = useCallback(() => {
     setMenu(!menu)
-  }
+  }, [menu])
 
   const clickSearch = useCallback(() => {
     setSearchView(!searchView)
@@ -51,7 +52,7 @@ const Header = () => {
   useEffect(() => {
     if (searchView) {
       const handleClick = e => {
-        if (!tooltipRef.current.contains(e.target)) {
+        if (!refSearch.current.contains(e.target)) {
           clickSearch()
           dispatch(clearSearch())
         }
@@ -60,6 +61,18 @@ const Header = () => {
       return () => document.removeEventListener('mousedown', handleClick)
     }
   }, [searchView, clickSearch, dispatch])
+
+  useEffect(() => {
+    if (menu) {
+      const handleClick = e => {
+        if (!refMenu.current.contains(e.target)) {
+          clickMenu()
+        }
+      }
+      document.addEventListener('mousedown', handleClick)
+      return () => document.removeEventListener('mousedown', handleClick)
+    }
+  }, [menu, clickMenu, dispatch])
 
   const logOut = () => {
     dispatch(logout())
@@ -99,8 +112,14 @@ const Header = () => {
         </div>
         <Burger onClick={() => clickMenu()} />
       </header>
-      {menu && <Menu closeFunc={() => clickMenu()} />}
-      {searchView && <SearchForm reff={tooltipRef} />}
+      {menu && (
+        <Menu
+          closeFunc={() => clickMenu()}
+          clickOnHash={clickMenu}
+          reff={refMenu}
+        />
+      )}
+      {searchView && <SearchForm reff={refSearch} />}
     </>
   )
 }

@@ -5,7 +5,7 @@ import Title from '../../../components/Title'
 
 const ThanksForOrder = () => {
   return (
-    <div className={'container ' + styles.block}>
+    <div className={styles.block}>
       <div className={styles.block_img}>
         <img src='https://i.ibb.co/y639BtB/ard9662.jpg' alt='girl' />
       </div>

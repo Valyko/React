@@ -5,6 +5,7 @@ import Title from '../../components/Title/Title'
 import Loader from '../../components/Loader'
 import AlsoLike from '../../components/AlsoLike'
 import BreadCrumbs from '../../components/BreadCrumbs'
+import Container from '../../components/Container'
 
 const PageFav = () => {
   const products = useSelector(state => state.products)
@@ -21,7 +22,7 @@ const PageFav = () => {
   }
 
   return (
-    <div className='container page'>
+    <Container>
       <BreadCrumbs startFrom='Home' />
       {favCounter ? (
         <>
@@ -38,7 +39,7 @@ const PageFav = () => {
           <AlsoLike />
         </>
       )}
-    </div>
+    </Container>
   )
 }
 

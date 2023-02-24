@@ -4,7 +4,7 @@ import './Instagram.scss'
 
 const Instagram = () => {
   return (
-    <section className='container py-5'>
+    <section>
       <Title title='Follow us' subtitle='Our Instagram' />
       <div className='row text-end'>
         <div className='col my-4'>

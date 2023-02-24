@@ -1,9 +1,22 @@
 .input {
-    border: none;
-    border-bottom: 1px solid #97A9BA;
-    color: #97A9BA;
-    font-size: 14px;
-    line-height: 18px;
-    padding: 15px;
-    width: 100%;
+  border: none;
+  border-bottom: 1px solid #97a9ba;
+  color: #97a9ba;
+  font-size: 14px;
+  line-height: 18px;
+  padding: 15px;
+  width: 100%;
+  &_block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    span {
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+    }
+  }
 }

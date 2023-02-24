@@ -26,6 +26,7 @@ const SignIn = () => {
   const { status, error } = useSelector(state => state.signIn)
   const [visibleError, setVisibleError] = useState(false)
   const token = useSelector(state => state.auth.token)
+  const [typeForPass, setTypeForPasss] = useState('password')
 
   useEffect(() => {
     if (status === 'resolved' || token) {
@@ -39,9 +40,15 @@ const SignIn = () => {
     dispatch(fetchSignIn(value))
   }
 
+  const showPass = () => {
+    typeForPass === 'password'
+      ? setTypeForPasss('text')
+      : setTypeForPasss('password')
+  }
+
   const loginValues = [
-    { placeholder: 'Login Or Email', name: 'loginOrEmail' },
-    { placeholder: 'Password', name: 'password' }
+    { placeholder: 'Login Or Email', name: 'loginOrEmail', type: 'text' },
+    { placeholder: 'Password', name: 'password', type: typeForPass }
   ]
 
   return (
@@ -54,7 +61,7 @@ const SignIn = () => {
         return (
           <Form>
             {loginValues.map(value => {
-              const { placeholder, name } = value
+              const { placeholder, name, type } = value
               return (
                 <div key={name}>
                   <Field
@@ -62,7 +69,10 @@ const SignIn = () => {
                     placeholder={placeholder}
                     id={name}
                     component={Input}
-                    type={name === 'password' ? 'password' : 'text'}
+                    type={type}
+                    show={name === 'password' ? true : false}
+                    showPass={showPass}
+                    checkIcon={typeForPass === 'password' ? true : false}
                   />
                   <span>
                     <ErrorMessage name={name} />

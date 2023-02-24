@@ -9,6 +9,7 @@ import AlsoLike from '../../components/AlsoLike/AlsoLike'
 import Loader from '../../components/Loader'
 import Title from '../../components/Title'
 import BreadCrumbs from '../../components/BreadCrumbs'
+import Container from '../../components/Container'
 
 export const PageItem = () => {
   const { itemNo } = useParams()
@@ -34,7 +35,7 @@ export const PageItem = () => {
   }
 
   return (
-    <div className='container page'>
+    <Container>
       <BreadCrumbs startFrom='Home' />
       {loading ? (
         <Loader />
@@ -81,6 +82,6 @@ export const PageItem = () => {
       <div className='item-galery-wrapper'>
         <AlsoLike />
       </div>
-    </div>
+    </Container>
   )
 }

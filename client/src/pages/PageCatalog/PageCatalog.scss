@@ -102,3 +102,15 @@
 .btn-reset {
   width: 200px;
 }
+
+.active {
+  @include for-medium-up {
+    cursor: pointer;
+  }
+}
+.for_catalog {
+  margin: 10px 0 5px 0;
+  @include for-medium-up {
+    width: 120px;
+  }
+}

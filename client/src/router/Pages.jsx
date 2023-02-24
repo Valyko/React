@@ -7,6 +7,7 @@ import PageCheckout from '../pages/PageCheckout'
 import PageSignIn from '../pages/PageSignIn/PageSignIn'
 import PageLogin from '../pages/PageLogin'
 import PageCabinet from '../pages/PageCabinet'
+import PageAboutUs from '../pages/PageAboutUs'
 
 export const publicRoutes = [
   { path: '/', element: PageHome },
@@ -16,7 +17,8 @@ export const publicRoutes = [
   { path: '/fav', element: PageFav },
   { path: '/signin', element: PageSignIn },
   { path: '/login', element: PageLogin },
-  { path: '/checkout', element: PageCheckout }
+  { path: '/checkout', element: PageCheckout },
+  { path: '/aboutus', element: PageAboutUs }
 ]
 
 export const privateRoutes = [

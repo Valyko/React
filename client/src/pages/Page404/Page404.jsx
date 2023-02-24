@@ -1,10 +1,11 @@
 import React from 'react'
 import Button from '../../components/Button'
+import Container from '../../components/Container'
 import './index.scss'
 
 function Page404() {
   return (
-    <div className='container'>
+    <Container>
       <div className='page__wrapper'>
         <div className='page__content'>
           <h1 className='page__title'>404</h1>
@@ -26,7 +27,7 @@ function Page404() {
           <img src='https://kept.com.ua/image/20Da/dotuk-69.jpg' alt='girl' />
         </div>
       </div>
-    </div>
+    </Container>
   )
 }
 

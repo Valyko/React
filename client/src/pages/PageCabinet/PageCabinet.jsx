@@ -14,6 +14,7 @@ import ProductCard from '../../components/ProductCard/ProductCard'
 import BreadCrumbs from '../../components/BreadCrumbs'
 import Modal from '../../components/Modal'
 import Button from '../../components/Button'
+import Container from '../../components/Container'
 
 const PageCabinet = () => {
   const userInfo = useSelector(state => state.user.data)
@@ -21,6 +22,7 @@ const PageCabinet = () => {
   const [info, setInfo] = useState(true)
   const [orderVis, setOrderVis] = useState(false)
   const [modal, setModal] = useState(false)
+  const [idOrder, setIdOrder] = useState(null)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -34,28 +36,33 @@ const PageCabinet = () => {
     }
   }
 
-  const visibleMenu = () => {
+  const visibleModal = () => {
     setModal(!modal)
+  }
+
+  const setIdOrderFunc = id => {
+    setIdOrder(id)
   }
 
   const deleteOrder = id => {
     dispatch(fetchDeleteOrder(id))
+    visibleModal()
   }
 
   return (
-    <div className='container py-5 page'>
+    <Container>
       <BreadCrumbs startFrom='Home' />
       <div className={styles.block}>
         <div className={styles.menu}>
           <p
             onClick={() => visible(info)}
-            className={`${info ? styles.active : null}`}
+            className={info ? styles.active : null}
           >
             Personal info
           </p>
           <p
             onClick={() => visible(orderVis)}
-            className={`${orderVis ? styles.active : null}`}
+            className={orderVis ? styles.active : null}
           >
             My orders
           </p>
@@ -76,7 +83,10 @@ const PageCabinet = () => {
               {order.length !== 0 &&
                 order.map(item => (
                   <div key={item._id}>
-                    <Title title={`${'№ ' + item._id}`} />
+                    <Title
+                      title={`${'№ ' + item._id}`}
+                      className={styles.title}
+                    />
                     <div className={styles.container}>
                       <div className={styles.information}></div>
                       <div className={styles.container_cards}>
@@ -120,7 +130,10 @@ const PageCabinet = () => {
                           </div>
                           <div className={styles.container_cards_info_block}>
                             <p
-                              onClick={visibleMenu}
+                              onClick={() => {
+                                visibleModal()
+                                setIdOrderFunc(item._id)
+                              }}
                               style={{ cursor: 'pointer' }}
                             >
                               DELETE ORDER
@@ -131,17 +144,19 @@ const PageCabinet = () => {
                     </div>
                     {modal && (
                       <Modal
-                        close={visibleMenu}
+                        close={visibleModal}
                         text='Are you sure you want to delete the order?'
                         actions={[
                           <Button
                             text='Yes'
-                            onClick={() => deleteOrder(item._id)}
+                            key='1'
+                            onClick={() => deleteOrder(idOrder)}
                             className={styles.btn}
                           />,
                           <Button
                             text='No'
-                            onClick={visibleMenu}
+                            key='2'
+                            onClick={visibleModal}
                             className={styles.btn}
                           />
                         ]}
@@ -153,7 +168,7 @@ const PageCabinet = () => {
           )}
         </div>
       </div>
-    </div>
+    </Container>
   )
 }
 

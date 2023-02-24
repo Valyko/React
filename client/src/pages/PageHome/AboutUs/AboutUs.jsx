@@ -1,9 +1,11 @@
 import React from 'react'
 import Title from '../../../components/Title'
+import DiscoverLink from '../../../components/DiscoverLink/DiscoverLink'
+import './AboutUs.scss'
 
 const AboutUs = () => {
   return (
-    <section className='container py-5'>
+    <section>
       <Title title='About Us' subtitle='Who we are' />
       <div className='row d-flex flex-column flex-md-row'>
         <div className='col d-flex flex-column gap-3 justify-content-between'>
@@ -48,6 +50,11 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
+      <DiscoverLink
+        subClass={'set-link set-item link'}
+        to='/aboutus'
+        style={{ display: 'flex' }}
+      />
     </section>
   )
 }

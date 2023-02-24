@@ -6,6 +6,7 @@ import SectionOrder from './SectionOrder'
 import './Other.scss'
 import AlsoLike from '../../components/AlsoLike'
 import BreadCrumbs from '../../components/BreadCrumbs'
+import Container from '../../components/Container'
 
 const PageCart = () => {
   const cardInCart = useSelector(state => state.cart.data)
@@ -14,7 +15,7 @@ const PageCart = () => {
   const { totalPrice, findItemsInCart } = useForCart()
 
   return (
-    <div className='container py-5 page'>
+    <Container>
       <BreadCrumbs startFrom='Home' />
       {!cartCounter.inCart ? (
         <>
@@ -31,7 +32,7 @@ const PageCart = () => {
           />
         </>
       )}
-    </div>
+    </Container>
   )
 }
 

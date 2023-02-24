@@ -11,6 +11,7 @@ import SortList from '../../components/SortList'
 import { setstartPage, setperPage } from '../../store/filter/filterSlice'
 import Pagination from '../../components/Pagination'
 import './PageCatalog.scss'
+import Container from '../../components/Container'
 
 const PageCatalog = () => {
   const { products, startPage, perPage } = useSelector(state => state.filter)
@@ -52,14 +53,14 @@ const PageCatalog = () => {
   }
 
   return (
-    <div className='container page'>
+    <Container>
       <BreadCrumbs startFrom='Home' />
       <Title subtitle='Catalogue' />
       <div className='page-wrapper'>
         <Title
           title='Filters box'
           showContent={showFilters}
-          className={'filtering'}
+          className={'filtering for_catalog'}
         />
         {filtersIsOpen && (
           <aside className='page-sidebar'>
@@ -106,7 +107,7 @@ const PageCatalog = () => {
           {pagesCount !== 1 && <Pagination />}
         </section>
       </div>
-    </div>
+    </Container>
   )
 }
 

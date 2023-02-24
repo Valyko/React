@@ -48,6 +48,7 @@ const Login = () => {
   const navigate = useNavigate()
   const [visibleError, setVisibleError] = useState(false)
   const token = useSelector(state => state.auth.token)
+  const [typeForPass, setTypeForPasss] = useState('password')
 
   useEffect(() => {
     if (statusLogin === 'rejected') {
@@ -65,12 +66,18 @@ const Login = () => {
     dispatch(fetchLogin(value))
   }
 
+  const showPass = () => {
+    typeForPass === 'password'
+      ? setTypeForPasss('text')
+      : setTypeForPasss('password')
+  }
+
   const SignInvalues = [
-    { placeholder: 'First Name', name: 'firstName' },
-    { placeholder: 'Last Name', name: 'lastName' },
-    { placeholder: 'Login', name: 'login' },
-    { placeholder: 'Email', name: 'email' },
-    { placeholder: 'Password', name: 'password' }
+    { placeholder: 'First Name', name: 'firstName', type: 'text' },
+    { placeholder: 'Last Name', name: 'lastName', type: 'text' },
+    { placeholder: 'Login', name: 'login', type: 'text' },
+    { placeholder: 'Email', name: 'email', type: 'text' },
+    { placeholder: 'Password', name: 'password', type: typeForPass }
   ]
 
   return (
@@ -83,7 +90,7 @@ const Login = () => {
         return (
           <Form>
             {SignInvalues.map(value => {
-              const { placeholder, name } = value
+              const { placeholder, name, type } = value
               return (
                 <div key={name} className={styles.forinput}>
                   <Field
@@ -91,7 +98,10 @@ const Login = () => {
                     placeholder={placeholder}
                     component={Input}
                     id={name}
-                    type={name === 'password' ? 'password' : 'text'}
+                    type={type}
+                    show={name === 'password' ? true : false}
+                    showPass={showPass}
+                    checkIcon={typeForPass === 'password' ? true : false}
                   />
                   <span>
                     <ErrorMessage name={name} />
