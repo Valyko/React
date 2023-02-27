@@ -9,14 +9,12 @@ export const fetchFilterProducts = createAsyncThunk(
       sizeFilter,
       startPage,
       perPage,
-      sortFilter,
-      minPrice,
-      maxPrice
+      sortFilter
     } = filtersData
 
     try {
       const respons = await fetch(
-        `/api/products/filter?startPage=${startPage}&perPage=${perPage}${categoryFilter}${colorFilter}${sizeFilter}${sortFilter}&minPrice=${minPrice}&maxPrice=${maxPrice}`
+        `/api/products/filter?startPage=${startPage}&perPage=${perPage}${categoryFilter}${colorFilter}${sizeFilter}${sortFilter}`
       )
       if (!respons.ok) {
         throw new Error('Server Error!')
