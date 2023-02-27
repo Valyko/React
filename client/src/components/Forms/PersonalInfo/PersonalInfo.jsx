@@ -22,11 +22,13 @@ const validationSchema = yup.object().shape({
     .string()
     .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
     .min(3, 'Too short')
+    .max(15, 'Too long')
     .required('Name is required'),
   lastName: yup
     .string()
     .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
     .min(3, 'Too short')
+    .max(15, 'Too long')
     .required('LastName is required'),
   telephone: yup
     .string()
