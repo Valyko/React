@@ -16,7 +16,7 @@ const validationSchema = yup.object().shape({
     .email('Not an Email')
     .required('Email is a required field')
     .min(8, 'Too short'),
-  telephone: yup
+  phone: yup
     .string()
     .required('required')
     .matches(phoneRegExp, 'Phone number is not valid')
@@ -64,7 +64,7 @@ const Order = ({ createOrder }) => {
     {
       placeholder: 'telephone',
       name: 'phone',
-      value: initialValues.telephone ? `${initialValues.telephone}` : null
+      value: initialValues.telephone ? initialValues.telephone : null
     }
   ]
   const ShippingInformation = [
@@ -127,7 +127,7 @@ const Order = ({ createOrder }) => {
             <Button
               text='Make an order'
               type='submit'
-              disabled={!values.name}
+              disabled={!values.value}
             />
           </Form>
         )

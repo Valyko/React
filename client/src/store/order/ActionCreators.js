@@ -18,7 +18,7 @@ export const fetchMakeOrder = createAsyncThunk(
         body: JSON.stringify({
           customerId: customerId,
           email: value.email,
-          mobile: value.telephone,
+          mobile: value.phone,
           letterSubject: 'Thank you for order.',
           letterHtml: '<h1>Your order is placed</h1>',
           status: 'not shipped',
