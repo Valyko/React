@@ -11,8 +11,6 @@ const initialState = {
   categories: [],
   color: [],
   size: [],
-  minPrice: '0',
-  maxPrice: '100',
   sort: { sortName: '', sortProperty: [] }
 }
 
@@ -50,24 +48,14 @@ export const filterSlice = createSlice({
       state.color = action.payload.color ? action.payload.color : []
       state.size = action.payload.size ? action.payload.size : []
       state.sort = action.payload.sort ?? []
-      state.minPrice = action.payload.minPrice
-      state.maxPrice = action.payload.maxPrice
     },
     setInitialState(state) {
       state = initialState
-    },
-    setMinPrice(state, action) {
-      state.minPrice = action.payload
-    },
-    setMaxPrice(state, action) {
-      state.maxPrice = action.payload
     },
     setResetFilters(state) {
       state.categories = []
       state.color = []
       state.size = []
-      state.minPrice = '0'
-      state.maxPrice = '100'
       state.sort = { sortName: '', sortProperty: [] }
     }
   },
@@ -97,8 +85,6 @@ export const {
   setperPage,
   setFilters,
   setInitialState,
-  setMinPrice,
-  setMaxPrice,
   setResetFilters
 } = filterSlice.actions
 

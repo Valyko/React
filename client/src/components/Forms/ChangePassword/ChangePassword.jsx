@@ -15,7 +15,8 @@ const validationSchema = yup.object().shape({
   newPassword: yup
     .string()
     .required('No password provided.')
-    .min(8, 'Password is too short'),
+    .min(8, 'Password is too short')
+    .max(25, 'Password is too long'),
   password: yup.string().required('No password provided.')
 })
 

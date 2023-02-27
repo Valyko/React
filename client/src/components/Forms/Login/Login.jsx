@@ -26,18 +26,25 @@ const validationSchema = yup.object().shape({
   password: yup
     .string()
     .required('No password provided.')
-    .min(8, 'Password is too short'),
+    .min(8, 'Password is too short')
+    .max(25, 'Password is too long'),
   firstName: yup
     .string()
     .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
     .min(3, 'Too short')
+    .max(15, 'Too long')
     .required('Name is required'),
   lastName: yup
     .string()
     .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
     .min(3, 'Too short')
+    .max(15, 'Too long')
     .required('LastName is required'),
-  login: yup.string().required('Login is required')
+  login: yup
+    .string()
+    .required('Login is required')
+    .min(3, 'Too short')
+    .max(15, 'Too long')
 })
 
 const Login = () => {

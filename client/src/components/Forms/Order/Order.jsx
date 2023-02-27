@@ -8,8 +8,7 @@ import Title from '../../Title'
 import styles from './Order.module.scss'
 import { useSelector } from 'react-redux'
 
-const phoneRegExp =
-  /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
+const phoneRegExp = /^\+380\d{3}\d{2}\d{2}\d{2}$/
 
 const validationSchema = yup.object().shape({
   email: yup
@@ -26,16 +25,22 @@ const validationSchema = yup.object().shape({
   country: yup
     .string()
     .matches(/^[A-Za-z ]*$/, 'Please enter valid country')
-    .required('Country is required'),
+    .required('Country is required')
+    .min(3, 'Too short')
+    .max(15, 'Too long'),
   city: yup
     .string()
     .matches(/^[A-Za-z ]*$/, 'Please enter valid city')
-    .required('Sity is required'),
-  zipCode: yup.number().required('ZIP Code is required').min(4, 'Too short'),
+    .required('Sity is required')
+    .min(3, 'Too short')
+    .max(15, 'Too long'),
+  zipCode: yup.number().required('ZIP Code is required'),
   adress: yup
     .string()
     .matches(/^[A-Za-z ]*$/, 'Please enter valid adress')
     .required('Adress is required')
+    .min(3, 'Too short')
+    .max(15, 'Too long')
 })
 
 const Order = ({ createOrder }) => {

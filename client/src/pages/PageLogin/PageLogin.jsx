@@ -7,7 +7,7 @@ const PageLogin = () => {
   return (
     <div className={styles.page}>
       <div className={styles.create}>
-        <Title subtitle='Edit personal information' />
+        <Title subtitle='Set personal information' />
         <Login />
       </div>
     </div>

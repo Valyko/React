@@ -11,8 +11,7 @@ import { clearStatusUpdate } from '../../../store/user/userSlice'
 import { fetchUpdateUser } from '../../../store/user/ActionCreators'
 import ErrorText from '../../TextRequests/TextRequests'
 
-const phoneRegExp =
-  /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
+const phoneRegExp = /^\+380\d{3}\d{2}\d{2}\d{2}$/
 const validationSchema = yup.object().shape({
   email: yup
     .string()
@@ -23,11 +22,13 @@ const validationSchema = yup.object().shape({
     .string()
     .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
     .min(3, 'Too short')
+    .max(15, 'Too long')
     .required('Name is required'),
   lastName: yup
     .string()
     .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
     .min(3, 'Too short')
+    .max(15, 'Too long')
     .required('LastName is required'),
   telephone: yup
     .string()
