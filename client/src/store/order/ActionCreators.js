@@ -22,13 +22,13 @@ export const fetchMakeOrder = createAsyncThunk(
           letterSubject: 'Thank you for order.',
           letterHtml: '<h1>Your order is placed</h1>',
           status: 'not shipped',
-          canceled: false
-          // deliveryAddress: {
-          //   country: value.country,
-          //   city: value.city,
-          //   address: value.adress,
-          //   postal: value.zipCode
-          // }
+          canceled: false,
+          development: JSON.stringify({
+            country: value.country,
+            city: value.city,
+            address: value.adress,
+            postal: value.zipCode
+          })
         })
       })
       if (!respons.ok) {

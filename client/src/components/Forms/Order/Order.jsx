@@ -34,9 +34,7 @@ const validationSchema = yup.object().shape({
     .required('Sity is required')
     .min(3, 'Too short')
     .max(15, 'Too long'),
-  zipCode: yup
-    .number()
-    .required('ZIP Code is required'),
+  zipCode: yup.number().required('ZIP Code is required'),
   adress: yup
     .string()
     .matches(/^[A-Za-z ]*$/, 'Please enter valid adress')
