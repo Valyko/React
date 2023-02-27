@@ -8,8 +8,7 @@ import Title from '../../Title'
 import styles from './Order.module.scss'
 import { useSelector } from 'react-redux'
 
-const phoneRegExp =
-  /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/
+const phoneRegExp = /^\+380\d{3}\d{2}\d{2}\d{2}$/
 
 const validationSchema = yup.object().shape({
   email: yup
