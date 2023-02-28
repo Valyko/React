@@ -24,20 +24,20 @@ const validationSchema = yup.object().shape({
     .max(13, 'too long'),
   country: yup
     .string()
-    .matches(/^[A-Za-z ]*$/, 'Please enter valid country')
+    .matches(/^[A-Za-z]*$/, 'Please enter valid country')
     .required('Country is required')
     .min(3, 'Too short')
     .max(15, 'Too long'),
   city: yup
     .string()
-    .matches(/^[A-Za-z ]*$/, 'Please enter valid city')
+    .matches(/^[A-Za-z]*$/, 'Please enter valid city')
     .required('Sity is required')
     .min(3, 'Too short')
     .max(15, 'Too long'),
   zipCode: yup.number().required('ZIP Code is required'),
   adress: yup
     .string()
-    .matches(/^[A-Za-z ]*$/, 'Please enter valid adress')
+    .matches(/^[0-9a-zA-Z ]*$/, 'Please enter valid adress')
     .required('Adress is required')
     .min(3, 'Too short')
     .max(15, 'Too long')
@@ -48,7 +48,7 @@ const Order = ({ createOrder }) => {
 
   const initialValues = {
     email: userInfo.email,
-    telephone: userInfo.telephone,
+    phone: userInfo.telephone,
     country: '',
     city: '',
     zipCode: '',
@@ -64,7 +64,7 @@ const Order = ({ createOrder }) => {
     {
       placeholder: 'telephone',
       name: 'phone',
-      value: initialValues.telephone ? initialValues.telephone : null
+      value: initialValues.phone ? initialValues.phone : null
     }
   ]
   const ShippingInformation = [

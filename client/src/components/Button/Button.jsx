@@ -16,7 +16,7 @@ const Button = ({ text, onClick, className, type, to, href }) => {
 
   return (
     <Component
-      className={'btn ' + className}
+      className={'btnn ' + className}
       href={href}
       to={to}
       onClick={onClick}

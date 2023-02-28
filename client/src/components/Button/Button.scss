@@ -1,4 +1,4 @@
-.btn {
+.btnn {
   background-color: #476785;
   border: 1px solid #476785;
   font-weight: 400;
@@ -8,6 +8,8 @@
   color: #f5f8fa;
   padding: 20px 0;
   border-radius: 0;
+  display: block;
+  text-align: center;
 
   &:hover {
     background-color: inherit;

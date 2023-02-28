@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+@import '../../styles/breakpoints.scss';
 .white {
   background-color: #e7e7e7;
 }
@@ -51,6 +53,11 @@
     position: relative;
     transition: box-shadow 0.3s;
     cursor: pointer;
+    @include for-small-up {
+      h3, p, span {
+        font-size: 11px;
+      }
+    }
   }
   &-card:hover .set-hover {
     opacity: 1;
@@ -70,6 +77,15 @@
     position: absolute;
     bottom: 82px;
     left: 0;
+    @include for-small-up {
+      button {
+        font-size: 8px;
+        padding: 0;
+      }
+      svg {
+        width: 45px;
+      }
+    }
   }
   &-addfavorit {
     background-color: #476785;
