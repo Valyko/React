@@ -63,7 +63,7 @@ const PageAboutUs = () => {
       <Button
         to='/catalog/filter'
         text='Go to catalog'
-        className={styles.btn}
+        className={styles.btnn}
       />
       <div className={styles.lastimg}>
         <img src='https://kept.com.ua/image/20F6/banner2.jpg' alt='img' />

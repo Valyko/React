@@ -4,10 +4,8 @@ import Button from '../../Button'
 import Input from '../Input'
 import * as yup from 'yup'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
 import { useState } from 'react'
 import styles from './PersonalInfo.module.scss'
-import { clearStatusUpdate } from '../../../store/user/userSlice'
 import { fetchUpdateUser } from '../../../store/user/ActionCreators'
 import ErrorText from '../../TextRequests/TextRequests'
 
@@ -20,13 +18,13 @@ const validationSchema = yup.object().shape({
     .min(8, 'Too short'),
   firstName: yup
     .string()
-    .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
+    .matches(/^[A-Za-z]*$/, 'Please enter valid name')
     .min(3, 'Too short')
     .max(15, 'Too long')
     .required('Name is required'),
   lastName: yup
     .string()
-    .matches(/^[A-Za-z ]*$/, 'Please enter valid name')
+    .matches(/^[A-Za-z]*$/, 'Please enter valid name')
     .min(3, 'Too short')
     .max(15, 'Too long')
     .required('LastName is required'),
@@ -41,30 +39,20 @@ const validationSchema = yup.object().shape({
 const PersonalInfo = () => {
   const dispatch = useDispatch()
   const info = useSelector(state => state.user.data)
-  const statusUpdate = useSelector(state => state.user.statusUpdate)
-  const [visibleError, setVisibleError] = useState(false)
   const [visibleSuccess, setVisibleSuccess] = useState(false)
-  const { location } = useSelector(state => state.location)
-
-  useEffect(() => {
-    dispatch(clearStatusUpdate())
-  }, [location, dispatch])
-
-  useEffect(() => {
-    if (statusUpdate === 'rejected') {
-      setVisibleError(true)
-      setVisibleSuccess(false)
-    } else if (statusUpdate === 'resolved') {
-      setVisibleSuccess(true)
-      setVisibleError(false)
-    } else {
-      setVisibleSuccess(false)
-      setVisibleError(false)
-    }
-  }, [statusUpdate])
 
   const updateValues = value => {
-    dispatch(fetchUpdateUser(value))
+    if (
+      value.firstName === info.firstName &&
+      value.lastName === info.lastName &&
+      value.email === info.email &&
+      value.telephone === info.telephone
+    ) {
+      return null
+    } else {
+      dispatch(fetchUpdateUser(value))
+      setVisibleSuccess(true)
+    }
   }
 
   const initialValues = {
@@ -126,15 +114,12 @@ const PersonalInfo = () => {
                 )
               })}
               <div className={styles.block}>
-                {visibleError && (
-                  <ErrorText text='Something went wrong. Try again' />
-                )}
                 {visibleSuccess && (
                   <ErrorText resolveText text='Personal info was changed' />
                 )}
                 <Button
                   text='Update info'
-                  disabled={!values.name}
+                  disabled={!values.value}
                   type='submit'
                 />
               </div>

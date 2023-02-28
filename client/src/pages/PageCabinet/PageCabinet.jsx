@@ -131,6 +131,7 @@ const PageCabinet = () => {
                           <div className={styles.container_cards_info_block}>
                             <p
                               onClick={() => {
+                                window.scrollTo({ top: 0, behavior: 'smooth' })
                                 visibleModal()
                                 setIdOrderFunc(item._id)
                               }}
@@ -142,28 +143,28 @@ const PageCabinet = () => {
                         </div>
                       </div>
                     </div>
-                    {modal && (
-                      <Modal
-                        close={visibleModal}
-                        text='Are you sure you want to delete the order?'
-                        actions={[
-                          <Button
-                            text='Yes'
-                            key='1'
-                            onClick={() => deleteOrder(idOrder)}
-                            className={styles.btn}
-                          />,
-                          <Button
-                            text='No'
-                            key='2'
-                            onClick={visibleModal}
-                            className={styles.btn}
-                          />
-                        ]}
-                      />
-                    )}
                   </div>
                 ))}
+              {modal && (
+                <Modal
+                  close={visibleModal}
+                  text='Are you sure you want to delete the order?'
+                  actions={[
+                    <Button
+                      text='Yes'
+                      key='1'
+                      onClick={() => deleteOrder(idOrder)}
+                      className={styles.btn}
+                    />,
+                    <Button
+                      text='No'
+                      key='2'
+                      onClick={visibleModal}
+                      className={styles.btn}
+                    />
+                  ]}
+                />
+              )}
             </>
           )}
         </div>

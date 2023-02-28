@@ -16,8 +16,14 @@ const initialValues = {
 }
 
 const validationSchema = yup.object().shape({
-  loginOrEmail: yup.string().required('Is required'),
-  password: yup.string().required('No password provided')
+  loginOrEmail: yup
+    .string()
+    .required('Is required')
+    .matches(/^[0-9a-zA-Z]*$/, 'Please enter valid loginOrEmail'),
+  password: yup
+    .string()
+    .required('No password provided')
+    .matches(/^[0-9a-zA-Z]*$/, 'Enter valid password')
 })
 
 const SignIn = () => {

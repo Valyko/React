@@ -99,7 +99,7 @@ const Header = () => {
           </NavLink>
           <Search
             onClick={!searchView ? () => clickSearch() : null}
-            style={{ cursor: 'pointer' }}
+            className={styles.search}
           />
           <NavLink to='/fav'>
             <Fav />

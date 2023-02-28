@@ -59,19 +59,20 @@ export const filterSlice = createSlice({
       state.sort = { sortName: '', sortProperty: [] }
     }
   },
-  extraReducers: {
-    [fetchFilterProducts.pending]: state => {
-      state.status = 'loading'
-      state.error = null
-    },
-    [fetchFilterProducts.fulfilled]: (state, action) => {
-      state.status = 'resolved'
-      state.products = action.payload
-    },
-    [fetchFilterProducts.rejected]: (state, action) => {
-      state.status = 'rejected'
-      state.error = action.payload
-    }
+  extraReducers: builder => {
+    builder
+      .addCase(fetchFilterProducts.pending, state => {
+        state.status = 'loading'
+        state.error = null
+      })
+      .addCase(fetchFilterProducts.fulfilled, (state, action) => {
+        state.status = 'resolved'
+        state.products = action.payload
+      })
+      .addCase(fetchFilterProducts.rejected, (state, action) => {
+        state.status = 'rejected'
+        state.error = action.payload
+      })
   }
 })
 

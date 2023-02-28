@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+@import '../../styles/breakpoints.scss';
 .collection {
   position: relative;
   color: #97a9ba;
@@ -15,5 +17,11 @@
     &:hover {
       stroke: #2d4153;
     }
+    @include for-small-up {
+      width: 25px;
+    }
+  }
+  @include for-small-up {
+    font-size: 12px;
   }
 }

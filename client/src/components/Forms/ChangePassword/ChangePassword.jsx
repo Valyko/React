@@ -15,6 +15,7 @@ const validationSchema = yup.object().shape({
   newPassword: yup
     .string()
     .required('No password provided.')
+    .matches(/^[0-9a-zA-Z]*$/, 'Enter valid password')
     .min(8, 'Password is too short')
     .max(25, 'Password is too long'),
   password: yup.string().required('No password provided.')
@@ -38,25 +39,27 @@ const ChangePassword = () => {
   }, [location, dispatch])
 
   useEffect(() => {
-    if (userInfo.password === 'Password does not match') {
-      setVisibleErrorMatch(true)
-      setVisibleError(false)
-      setVisibleResolve(false)
-    } else if (statusChangePass === 'resolved') {
-      setVisibleError(false)
-      setVisibleResolve(true)
-    } else if (statusChangePass === 'rejected') {
-      setVisibleResolve(false)
-      setVisibleError(true)
+    if (statusChangePass) {
+      if (statusChangePass.password === 'Password does not match') {
+        setVisibleErrorMatch(true)
+        setVisibleError(false)
+        setVisibleResolve(false)
+      } else if (statusChangePass.message === 'Password successfully changed') {
+        setVisibleResolve(true)
+        setVisibleErrorMatch(false)
+        setVisibleError(false)
+      }
     } else {
       setVisibleErrorMatch(false)
       setVisibleError(false)
       setVisibleResolve(false)
     }
-  }, [statusChangePass, userInfo])
+  }, [statusChangePass])
 
   const updateValues = value => {
-    dispatch(fetchChangePassword(value))
+    if (value.newPassword !== value.password) {
+      dispatch(fetchChangePassword(value))
+    }
   }
   const showPass = value => {
     value === 'old'
@@ -121,11 +124,11 @@ const ChangePassword = () => {
               })}
               <div className={styles.block}>
                 {visibleErrorMatch && (
-                  <ErrorText text='Password does not match, try again' />
+                  <ErrorText text={statusChangePass.password} />
                 )}
                 {visibleError && <ErrorText text='Smth wrong happened' />}
                 {visibleResolve && (
-                  <ErrorText resolveText text='Password successfully changed' />
+                  <ErrorText resolveText text={statusChangePass.message} />
                 )}
                 <Button
                   text='Change Password'

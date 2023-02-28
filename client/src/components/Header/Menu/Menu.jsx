@@ -4,15 +4,18 @@ import { HashLink } from 'react-router-hash-link'
 import { ReactComponent as Close } from './svg/close.svg'
 import PropTypes from 'prop-types'
 import styles from './Menu.module.scss'
+import { useSelector } from 'react-redux'
 
 const Menu = ({ closeFunc, clickOnHash, reff }) => {
+  const token = useSelector(state => state.auth.token)
+
   const arr = [
     { option: 'New lingerie', link: '/catalog/filter' },
     { option: 'About Us', link: '/aboutus' },
-    { option: 'Profile', link: '/profile' },
     { option: 'Catalogue', link: '/catalog/filter' },
     { option: 'Contact', hash: '#contact' }
   ]
+  const arrForUser = [...arr, { option: 'Profile', link: '/profile' }]
 
   return (
     <>
@@ -23,7 +26,7 @@ const Menu = ({ closeFunc, clickOnHash, reff }) => {
         </div>
         <div className={styles.menu__body_list}>
           <div>
-            {arr.map((value, index) => {
+            {(token ? arrForUser : arr).map((value, index) => {
               const { option, link, hash } = value
               return link ? (
                 <NavLink to={link} key={index}>
@@ -45,7 +48,7 @@ const Menu = ({ closeFunc, clickOnHash, reff }) => {
 Menu.propTypes = {
   closeFunc: PropTypes.func.isRequired,
   clickOnHash: PropTypes.func.isRequired,
-  reff: PropTypes.string
+  reff: PropTypes.object
 }
 
 export default Menu

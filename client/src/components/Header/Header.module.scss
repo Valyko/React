@@ -79,8 +79,12 @@
         position: relative;
       }
       @media (max-width: 400px) {
-        justify-content: space-between;
+        justify-content: space-evenly;
       }
     }
+  }
+  svg.search {
+    cursor: pointer;
+    margin-bottom: -4px;
   }
 }
