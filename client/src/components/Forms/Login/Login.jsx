@@ -30,6 +30,12 @@ const validationSchema = yup.object().shape({
     .min(8, 'Password is too short')
     .matches(/^[0-9a-zA-Z]*$/, 'Enter valid password')
     .max(25, 'Password is too long'),
+  confirm: yup
+    .string()
+    .required('No password provided.')
+    .min(8, 'Password is too short')
+    .matches(/^[0-9a-zA-Z]*$/, 'Enter valid password')
+    .max(25, 'Password is too long'),
   firstName: yup
     .string()
     .matches(/^[A-Za-z]*$/, 'Please enter valid name')
@@ -57,14 +63,16 @@ const Login = () => {
   const errorMessage = useSelector(state => state.login.error)
   const navigate = useNavigate()
   const [visibleError, setVisibleError] = useState(false)
+  const [samePassError, setSamePassError] = useState(false)
   const token = useSelector(state => state.auth.token)
   const [typeForPass, setTypeForPasss] = useState('password')
-  const [typeForPassNew, setTypeForPasssNew] = useState('password')
+  const [typeForConfirm, setTypeForPasssConfirm] = useState('password')
 
   useEffect(() => {
     if (statusLogin === 'rejected') {
       setVisibleError(true)
     }
+    setSamePassError(false)
   }, [statusLogin])
 
   useEffect(() => {
@@ -74,17 +82,21 @@ const Login = () => {
   }, [statusSignIn, token, navigate])
 
   const registerUser = value => {
-    dispatch(fetchLogin(value))
+    if (value.password !== value.confirm) {
+      setSamePassError(true)
+    } else {
+      dispatch(fetchLogin(value))
+    }
   }
 
   const showPass = value => {
-    value === 'old'
+    value === 'password'
       ? typeForPass === 'password'
         ? setTypeForPasss('text')
         : setTypeForPasss('password')
-      : typeForPassNew === 'password'
-      ? setTypeForPasssNew('text')
-      : setTypeForPasssNew('password')
+      : typeForConfirm === 'password'
+      ? setTypeForPasssConfirm('text')
+      : setTypeForPasssConfirm('password')
   }
 
   const SignInvalues = [
@@ -93,7 +105,11 @@ const Login = () => {
     { placeholder: 'Login', name: 'login', type: 'text' },
     { placeholder: 'Email', name: 'email', type: 'text' },
     { placeholder: 'Password', name: 'password', type: typeForPass },
-    { placeholder: 'Confirm password', name: 'confirm', type: typeForPassNew }
+    {
+      placeholder: 'Confirm password',
+      name: 'confirm',
+      type: typeForConfirm
+    }
   ]
 
   return (
@@ -120,11 +136,15 @@ const Login = () => {
                     }
                     showPass={
                       name === 'password'
-                        ? () => showPass('old')
-                        : () => showPass('new')
+                        ? () => showPass('password')
+                        : () => showPass('confirm')
                     }
                     checkIcon={
-                      typeForPass === 'password' || typeForPass === 'confirm'
+                      name === 'password'
+                        ? typeForPass === 'password'
+                          ? true
+                          : false
+                        : typeForConfirm === 'password'
                         ? true
                         : false
                     }
@@ -138,6 +158,9 @@ const Login = () => {
             <div className={styles.block_btn}>
               {visibleError && (
                 <span style={{ color: 'red' }}>{errorMessage}</span>
+              )}
+              {samePassError && (
+                <span style={{ color: 'red' }}>Password mismatch</span>
               )}
               <Button
                 text='Create User'
