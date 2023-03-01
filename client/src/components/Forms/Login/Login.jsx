@@ -14,7 +14,8 @@ const initialValues = {
   password: '',
   firstName: '',
   lastName: '',
-  login: ''
+  login: '',
+  confirm: ''
 }
 
 const validationSchema = yup.object().shape({
@@ -58,6 +59,7 @@ const Login = () => {
   const [visibleError, setVisibleError] = useState(false)
   const token = useSelector(state => state.auth.token)
   const [typeForPass, setTypeForPasss] = useState('password')
+  const [typeForPassNew, setTypeForPasssNew] = useState('password')
 
   useEffect(() => {
     if (statusLogin === 'rejected') {
@@ -75,10 +77,14 @@ const Login = () => {
     dispatch(fetchLogin(value))
   }
 
-  const showPass = () => {
-    typeForPass === 'password'
-      ? setTypeForPasss('text')
-      : setTypeForPasss('password')
+  const showPass = value => {
+    value === 'old'
+      ? typeForPass === 'password'
+        ? setTypeForPasss('text')
+        : setTypeForPasss('password')
+      : typeForPassNew === 'password'
+      ? setTypeForPasssNew('text')
+      : setTypeForPasssNew('password')
   }
 
   const SignInvalues = [
@@ -86,7 +92,8 @@ const Login = () => {
     { placeholder: 'Last Name', name: 'lastName', type: 'text' },
     { placeholder: 'Login', name: 'login', type: 'text' },
     { placeholder: 'Email', name: 'email', type: 'text' },
-    { placeholder: 'Password', name: 'password', type: typeForPass }
+    { placeholder: 'Password', name: 'password', type: typeForPass },
+    { placeholder: 'Confirm password', name: 'confirm', type: typeForPassNew }
   ]
 
   return (
@@ -108,9 +115,19 @@ const Login = () => {
                     component={Input}
                     id={name}
                     type={type}
-                    show={name === 'password' ? true : false}
-                    showPass={showPass}
-                    checkIcon={typeForPass === 'password' ? true : false}
+                    show={
+                      name === 'password' || name === 'confirm' ? true : false
+                    }
+                    showPass={
+                      name === 'password'
+                        ? () => showPass('old')
+                        : () => showPass('new')
+                    }
+                    checkIcon={
+                      typeForPass === 'password' || typeForPass === 'confirm'
+                        ? true
+                        : false
+                    }
                   />
                   <span>
                     <ErrorMessage name={name} />

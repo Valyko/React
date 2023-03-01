@@ -11,7 +11,6 @@ import { fetchWishlist } from './store/wishlist/ActionCreator'
 import { useLocation } from 'react-router-dom'
 import { fetchGetUser } from './store/user/ActionCreators'
 import { setLocation } from './store/location/location'
-import { clearStatusOrder } from './store/order/order'
 import UpToTop from './components/UpToTop/UpToTop'
 import { useForApp } from './hooks/useForApp'
 
@@ -25,14 +24,16 @@ function App() {
     useForApp()
 
   useEffect(() => {
-    dispatch(setLocation(locationHook.pathname))
     dispatch(fetchProducts())
     if (localStorage.getItem('userToken')) {
       const data = JSON.parse(localStorage.getItem('userToken'))
       dispatch(login(data.token))
       dispatch(fetchGetUser())
     }
-    dispatch(clearStatusOrder())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(setLocation(locationHook.pathname))
   }, [dispatch, locationHook])
 
   useEffect(() => {
