@@ -74,6 +74,12 @@ const Header = () => {
     }
   }, [menu, clickMenu, dispatch])
 
+  useEffect(() => {
+    if (!searchView) {
+      dispatch(clearSearch())
+    }
+  }, [dispatch, searchView])
+
   const logOut = () => {
     dispatch(logout())
     dispatch(checkInCart(0))
