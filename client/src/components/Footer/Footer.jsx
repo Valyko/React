@@ -6,8 +6,8 @@ import { media, addresses, collections, categories } from './consts'
 
 const Footer = () => {
   return (
-    <footer id='contact'>
-      <div className={styles.container}>
+    <footer>
+      <div className={styles.container} id='contact'>
         <div className={styles.footer__block}>
           <Logo />
           <div className={styles.footer__block_list}>
