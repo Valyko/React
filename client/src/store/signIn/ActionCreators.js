@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { login } from '../tokenWork/tokenWork'
+import { fetchGetUser } from '../user/ActionCreators'
 
 export const fetchSignIn = createAsyncThunk(
   'signIn/fetchSignIn',
@@ -22,6 +23,7 @@ export const fetchSignIn = createAsyncThunk(
       }
       const data = await respons.json()
       dispatch(login(data.token))
+      dispatch(fetchGetUser())
       return data
     } catch (error) {
       return rejectWithValue(error.message)
