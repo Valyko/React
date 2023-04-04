@@ -22,6 +22,7 @@ const PageCatalog = () => {
   const [colorActive, setcolorActive] = useState(true)
   const [categoryActive, setcategoryActive] = useState(true)
   const [filtersIsOpen, setfiltersIsOpen] = useState(true)
+  const [filterBox, setFilterBox] = useState(false)
 
   function useWindowSize() {
     const [displayWidth, setdisplayWidth] = useState(0)
@@ -43,8 +44,15 @@ const PageCatalog = () => {
 
   const dispatch = useDispatch()
   useEffect(() => {
-    currentWidth < 768 ? dispatch(setperPage(6)) : dispatch(setperPage(6))
-    currentWidth < 768 ? setfiltersIsOpen(false) : setfiltersIsOpen(true)
+    if (currentWidth < 768) {
+      dispatch(setperPage(6))
+      setfiltersIsOpen(false)
+      setFilterBox(true)
+    } else {
+      dispatch(setperPage(6))
+      setfiltersIsOpen(true)
+      setFilterBox(false)
+    }
   }, [currentWidth, dispatch])
 
   const LoadMore = () => {
@@ -57,11 +65,13 @@ const PageCatalog = () => {
       <BreadCrumbs startFrom='Home' />
       <Title subtitle='Catalogue' />
       <div className='page-wrapper'>
-        <Title
-          title='Filters box'
-          showContent={showFilters}
-          className={'filtering for_catalog'}
-        />
+        {filterBox && (
+          <Title
+            title='Filters box'
+            showContent={showFilters}
+            className={'filtering for_catalog active'}
+          />
+        )}
         {filtersIsOpen && (
           <aside className='page-sidebar'>
             <Title
